@@ -1,45 +1,21 @@
-# settings.toml: Configuration for the documentation mirror
+# settings.toml: Configuration for the Developer Knowledge documentation mirror
 
-# Discovery entry points
+# The /knowledge root is an HTTP-only redirect shell and is not present in the
+# Developer Knowledge API, so use API-present pages as discovery entry points.
 seeds = [
-    "https://docs.cloud.google.com/YOUR_PRODUCT/docs",
-    "https://docs.cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT",
-    # Replace PRODUCT_PAGE_PATH with a product page confirmed to exist in the
-    # Developer Knowledge API, which may be YOUR_PRODUCT or products/YOUR_PRODUCT.
-    "https://cloud.google.com/PRODUCT_PAGE_PATH",
+    "https://developers.google.com/knowledge/api",
+    "https://developers.google.com/knowledge/quickstart",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge",
 ]
 
-# Path prefixes to mirror
-# Keep the documentation and product-site corpora distinct.
+# Keep the Google Developers corpus and gcloud command reference narrowly scoped.
+# The legacy Cloud prefix lets old links recover through their HTTP redirect to
+# docs.cloud.google.com without crawling unrelated Cloud documentation.
 prefixes = [
-    "docs.cloud.google.com/YOUR_PRODUCT/",
-    "docs.cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT/",
-    "docs.cloud.google.com/sdk/gcloud/reference/alpha/YOUR_PRODUCT/",
-    "docs.cloud.google.com/sdk/gcloud/reference/beta/YOUR_PRODUCT/",
-    # Product pages are explicit seeds; keep only legacy documentation paths
-    # here so old links can self-correct through their HTTP redirects.
-    "cloud.google.com/YOUR_PRODUCT/docs/",
-    "cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT/",
-    "cloud.google.com/sdk/gcloud/reference/alpha/YOUR_PRODUCT/",
-    "cloud.google.com/sdk/gcloud/reference/beta/YOUR_PRODUCT/",
+    "developers.google.com/knowledge/",
+    "docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
+    "cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
 ]
 
-# Sitemap URL(s) to discover links
-# sitemaps = ["https://cloud.google.com/sitemap.xml"]
-
-# Recursive discovery from Markdown content
 recursive = true
-
-# Rate limiting: requests per minute (default: 50.0)
-# qpm = 50.0
-
-# Wait duration when quota is exceeded (default: 1m10s)
-# qw = "1m10s"
-
-# default_host is used for relative links and path-only prefixes.
-# Defaults to "docs.cloud.google.com". Set to "developers.google.com" or
-# another supported corpus host when mirroring outside Google Cloud docs.
-# default_host = "docs.cloud.google.com"
-
-# Use host-scoped prefixes when mirroring a non-default host:
-# prefixes = ["developers.google.com/YOUR_PRODUCT/"]
+default_host = "developers.google.com"
