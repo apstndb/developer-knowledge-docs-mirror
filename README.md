@@ -1,6 +1,18 @@
-# Google Cloud Documentation Mirror Template
+# Developer Knowledge Documentation Mirror
 
-This repository is a template for creating a local Markdown mirror of official Google Cloud documentation. It is designed to be automatically updated via GitHub Actions.
+A local Markdown mirror of [Google Developer Knowledge](https://developers.google.com/knowledge/api) documentation, automatically updated via GitHub Actions.
+
+This mirror covers the Developer Knowledge tree on `developers.google.com`:
+
+- **API**: [`developers.google.com/knowledge/api`](https://developers.google.com/knowledge/api)
+- **MCP**: [`developers.google.com/knowledge/mcp`](https://developers.google.com/knowledge/mcp)
+- **Corpus reference**: [`developers.google.com/knowledge/reference/corpus-reference`](https://developers.google.com/knowledge/reference/corpus-reference)
+- **Release notes**: [`developers.google.com/knowledge/release-notes`](https://developers.google.com/knowledge/release-notes)
+- **RPC reference** under [`developers.google.com/knowledge/reference/rpc/`](https://developers.google.com/knowledge/reference/rpc/), discovered recursively from those seeds
+
+`default_host` is `developers.google.com`. The crawl prefix is `developers.google.com/knowledge/`, which includes the pages above and excludes the separate [Knowledge Graph](https://developers.google.com/knowledge-graph/) corpus (`developers.google.com/knowledge-graph/`).
+
+This repository does not mirror Gemini Enterprise Agent Platform pages such as [Connect to the Knowledge MCP server](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/connect-to-the-knowledge-mcp-server). That page belongs to a different product tree and is already covered by [gemini-enterprise-agent-platform-docs-mirror](https://github.com/apstndb/gemini-enterprise-agent-platform-docs-mirror).
 
 ## Authentication Setup
 
@@ -90,21 +102,12 @@ gh secret set DEVELOPERKNOWLEDGE_API_KEY --body "YOUR_API_KEY"
 
 ## Setup Instructions
 
-1.  **Create a new repository** using this template.
-2.  **Modify `settings.toml`**:
-    *   Replace `YOUR_PRODUCT` with the actual path component of the documentation (e.g., `spanner`, `bigquery`).
-    *   Replace `PRODUCT_PAGE_PATH` with a product page that is present in the Developer Knowledge API (for example, `spanner` or `products/firestore`).
-    *   Adjust `seeds` and `prefixes` as needed.
-    *   Keep `docs.cloud.google.com` and `cloud.google.com` host-scoped prefixes separate. They are distinct API corpora; explicit product-page seeds are fetched even when they are outside the recursive prefixes, while narrow legacy documentation prefixes allow old links to follow their redirects without crawling unrelated product-site pages.
-    *   Product-page seeds require `gcp-docs-mirror-tools` v0.3.0 or newer; the workflow currently pins v0.3.0.
-3.  **Adjust Update Schedule**:
-    *   Edit `.github/workflows/update-mirror.yml`.
-    *   **Crucial**: If you are maintaining multiple mirrors with the same API key, **offset the cron schedules** (e.g., `0 1 * * *`, `0 2 * * *`) to avoid simultaneous API requests that could exhaust your quota.
-4.  **Configure GitHub Secrets**:
-    *   Follow either **Option A (Workload Identity Federation)** or **Option B (API Key)** above to set up the necessary secrets in your GitHub repository.
-5.  **Enable GitHub Actions**:
+1.  **Configure GitHub Secrets**:
+    *   Follow either **Option A (Workload Identity Federation)** or **Option B (API Key)** above to set up the necessary secrets in this repository.
+    *   Working sibling mirrors such as [bigquery-docs-mirror](https://github.com/apstndb/bigquery-docs-mirror) use the same workflow auth pattern. This repository currently has neither WIF nor an API key configured, so scheduled runs fail before they fetch any pages.
+2.  **Enable GitHub Actions**:
     *   Go to the `Actions` tab and enable workflows.
-    *   The mirror will automatically update according to your schedule, or you can trigger it manually via `workflow_dispatch`.
+    *   The mirror updates daily at 18:00 UTC (03:00 JST), or you can trigger it manually via `workflow_dispatch`.
 
 ## Quota Management
 
@@ -125,6 +128,6 @@ This mirror system is powered by [gcp-docs-mirror-tools](https://github.com/apst
 
 ## License
 
-The documentation content collected in this repository is mirrored from Google Cloud Documentation according to the [Google Developers Site Policies](https://developers.google.com/terms/site-policies).
+The documentation content collected in this repository is mirrored from Google Developers documentation according to the [Google Developers Site Policies](https://developers.google.com/terms/site-policies).
 - Documentation content is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 - Code samples are licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).

@@ -1,31 +1,28 @@
-# settings.toml: Configuration for the documentation mirror
+# settings.toml: Configuration for the Developer Knowledge documentation mirror
 
-# Discovery entry points
+# Relative links under this corpus resolve against developers.google.com.
+# Path-only prefixes are also matched under this host. The tool default is
+# docs.cloud.google.com; this mirror stays on the Google Developers corpus.
+default_host = "developers.google.com"
+
+# Discovery entry points confirmed present in the Developer Knowledge API
+# (`get --view basic`). Do not seed:
+#   - https://developers.google.com/knowledge (bare path; API 404)
+#   - https://developers.google.com/knowledge/api/reference (API 404)
+#   - https://developers.google.com/knowledge/reference (bare; API 404)
 seeds = [
-    "https://docs.cloud.google.com/YOUR_PRODUCT/docs",
-    "https://docs.cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT",
-    # Replace PRODUCT_PAGE_PATH with a product page confirmed to exist in the
-    # Developer Knowledge API, which may be YOUR_PRODUCT or products/YOUR_PRODUCT.
-    "https://cloud.google.com/PRODUCT_PAGE_PATH",
+    "https://developers.google.com/knowledge/api",
+    "https://developers.google.com/knowledge/mcp",
+    "https://developers.google.com/knowledge/reference/corpus-reference",
+    "https://developers.google.com/knowledge/release-notes",
 ]
 
-# Path prefixes to mirror
-# Keep the documentation and product-site corpora distinct.
+# Host-scoped prefix is required so this corpus is not confused with
+# developers.google.com/knowledge-graph/. RPC reference pages under
+# developers.google.com/knowledge/reference/rpc/ are discovered recursively.
 prefixes = [
-    "docs.cloud.google.com/YOUR_PRODUCT/",
-    "docs.cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT/",
-    "docs.cloud.google.com/sdk/gcloud/reference/alpha/YOUR_PRODUCT/",
-    "docs.cloud.google.com/sdk/gcloud/reference/beta/YOUR_PRODUCT/",
-    # Product pages are explicit seeds; keep only legacy documentation paths
-    # here so old links can self-correct through their HTTP redirects.
-    "cloud.google.com/YOUR_PRODUCT/docs/",
-    "cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT/",
-    "cloud.google.com/sdk/gcloud/reference/alpha/YOUR_PRODUCT/",
-    "cloud.google.com/sdk/gcloud/reference/beta/YOUR_PRODUCT/",
+    "developers.google.com/knowledge/",
 ]
-
-# Sitemap URL(s) to discover links
-# sitemaps = ["https://cloud.google.com/sitemap.xml"]
 
 # Recursive discovery from Markdown content
 recursive = true
@@ -35,11 +32,3 @@ recursive = true
 
 # Wait duration when quota is exceeded (default: 1m10s)
 # qw = "1m10s"
-
-# default_host is used for relative links and path-only prefixes.
-# Defaults to "docs.cloud.google.com". Set to "developers.google.com" or
-# another supported corpus host when mirroring outside Google Cloud docs.
-# default_host = "docs.cloud.google.com"
-
-# Use host-scoped prefixes when mirroring a non-default host:
-# prefixes = ["developers.google.com/YOUR_PRODUCT/"]
