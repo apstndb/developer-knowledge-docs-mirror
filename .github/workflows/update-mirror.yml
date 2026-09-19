@@ -2,8 +2,8 @@ name: Update Documentation Mirror
 
 on:
   schedule:
-    # Runs at 18:00 UTC every day (03:00 JST)
-    - cron: '0 18 * * *'
+    # Runs at 17:20 UTC every day (02:20 JST the following day)
+    - cron: '20 17 * * *'
   workflow_dispatch: # Allows manual triggering from the Actions tab
 
 permissions:
@@ -14,13 +14,13 @@ jobs:
   update-mirror:
     runs-on: ubuntu-latest
     env:
-      TOOL_VERSION: v0.3.0
+      TOOL_VERSION: v0.3.1
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
       - name: Get current date
-        run: echo "TODAY=$(date -u +'%Y-%m-%d')" >> $GITHUB_ENV
+        run: echo "TODAY=$(date -u +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
       - name: Download Mirror Tool Binary
         env:

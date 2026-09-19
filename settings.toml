@@ -1,34 +1,19 @@
-# settings.toml: Configuration for the Developer Knowledge documentation mirror
-
-# Relative links under this corpus resolve against developers.google.com.
-# Path-only prefixes are also matched under this host. The tool default is
-# docs.cloud.google.com; this mirror stays on the Google Developers corpus.
+# Developer Knowledge API, MCP, and gcloud documentation.
 default_host = "developers.google.com"
-
-# Discovery entry points confirmed present in the Developer Knowledge API
-# (`get --view basic`). Do not seed:
-#   - https://developers.google.com/knowledge (bare path; API 404)
-#   - https://developers.google.com/knowledge/api/reference (API 404)
-#   - https://developers.google.com/knowledge/reference (bare; API 404)
 seeds = [
     "https://developers.google.com/knowledge/api",
+    "https://developers.google.com/knowledge/quickstart",
     "https://developers.google.com/knowledge/mcp",
     "https://developers.google.com/knowledge/reference/corpus-reference",
     "https://developers.google.com/knowledge/release-notes",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge",
 ]
-
-# Host-scoped prefix is required so this corpus is not confused with
-# developers.google.com/knowledge-graph/. RPC reference pages under
-# developers.google.com/knowledge/reference/rpc/ are discovered recursively.
+# The bare /knowledge page is not an API document. Host-scoped prefixes also
+# exclude the unrelated /knowledge-graph tree. The legacy prefix permits
+# redirect recovery when an old gcloud link is discovered or explicitly seeded.
 prefixes = [
     "developers.google.com/knowledge/",
+    "docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
+    "cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
 ]
-
-# Recursive discovery from Markdown content
 recursive = true
-
-# Rate limiting: requests per minute (default: 50.0)
-# qpm = 50.0
-
-# Wait duration when quota is exceeded (default: 1m10s)
-# qw = "1m10s"
