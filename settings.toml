@@ -1,21 +1,19 @@
-# settings.toml: Configuration for the Developer Knowledge documentation mirror
-
-# The /knowledge root is an HTTP-only redirect shell and is not present in the
-# Developer Knowledge API, so use API-present pages as discovery entry points.
+# Developer Knowledge API, MCP, and gcloud documentation.
+default_host = "developers.google.com"
 seeds = [
     "https://developers.google.com/knowledge/api",
     "https://developers.google.com/knowledge/quickstart",
+    "https://developers.google.com/knowledge/mcp",
+    "https://developers.google.com/knowledge/reference/corpus-reference",
+    "https://developers.google.com/knowledge/release-notes",
     "https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge",
 ]
-
-# Keep the Google Developers corpus and gcloud command reference narrowly scoped.
-# The legacy Cloud prefix lets old links recover through their HTTP redirect to
-# docs.cloud.google.com without crawling unrelated Cloud documentation.
+# The bare /knowledge page is not an API document. Host-scoped prefixes also
+# exclude the unrelated /knowledge-graph tree. The legacy prefix permits
+# redirect recovery when an old gcloud link is discovered or explicitly seeded.
 prefixes = [
     "developers.google.com/knowledge/",
     "docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
     "cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
 ]
-
 recursive = true
-default_host = "developers.google.com"

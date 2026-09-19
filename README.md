@@ -1,34 +1,25 @@
 # Developer Knowledge Documentation Mirror
 
-This repository mirrors official Developer Knowledge documentation as Markdown using [gcp-docs-mirror-tools](https://github.com/apstndb/gcp-docs-mirror-tools).
+A Markdown mirror of [Developer Knowledge](https://developers.google.com/knowledge/api), powered by [gcp-docs-mirror-tools](https://github.com/apstndb/gcp-docs-mirror-tools).
 
-The mirror covers:
+The mirror includes API and MCP guides, quickstarts, corpus reference, release notes, REST/RPC reference, and the available gcloud alpha developer-knowledge command reference. Host-scoped prefixes exclude Knowledge Graph and unrelated product trees. Narrow legacy Cloud prefixes allow redirect recovery when old links are discovered or seeded.
 
-- Developer Knowledge API and quickstart documentation under `developers.google.com/knowledge/`
-- Developer Knowledge MCP documentation in the same documentation family
-- The available `gcloud alpha developer-knowledge` command reference
-- Legacy `cloud.google.com` links for that command family, which are followed to their canonical `docs.cloud.google.com` destinations
+## Updates and authentication
 
-The stable and beta `gcloud developer-knowledge` command families are not included because those pages are not currently available through either the Developer Knowledge API or the public documentation site.
+The [workflow](.github/workflows/update-mirror.yml) runs daily at 17:20 UTC (02:20 JST the following day), or manually with workflow_dispatch. Documentation is stored in docs/, with metadata.yaml and logs/ describing the sync.
 
-## Automatic updates
-
-The [update workflow](.github/workflows/update-mirror.yml) rebuilds the mirror daily at 17:20 UTC (02:20 JST on the following day) and can also be run manually. Generated documentation is committed under `docs/`, with run metadata and diagnostics in `metadata.yaml` and `logs/`.
-
-The workflow requires the `DEVELOPERKNOWLEDGE_API_KEY` repository secret. It also supports Workload Identity Federation when `GCP_WORKLOAD_IDENTITY_PROVIDER` and `GCP_SERVICE_ACCOUNT` are configured.
+GitHub Actions uses Workload Identity Federation through the GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT repository secrets. The shared mirror identity admits apstndb-owned repositories ending in -docs-mirror on main. No API key is needed for this repository.
 
 ## Manual run
 
-Set a Developer Knowledge API key, then run the pinned mirror tool version:
+With Go installed, configure Application Default Credentials or set DEVELOPERKNOWLEDGE_API_KEY, then run:
 
 ```bash
-export DEVELOPERKNOWLEDGE_API_KEY=your_api_key
 ./mirror.sh v0.3.1
 ```
 
+The script prefers an existing local binary; remove or replace that binary if you need to change its version.
+
 ## License
 
-The mirrored documentation is subject to the [Google Developers Site Policies](https://developers.google.com/terms/site-policies):
-
-- Documentation content is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-- Code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+Mirrored content follows the [Google Developers Site Policies](https://developers.google.com/terms/site-policies): documentation is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and code samples are [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
