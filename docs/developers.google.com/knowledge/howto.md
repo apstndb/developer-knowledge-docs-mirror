@@ -1,0 +1,290 @@
+---
+name: documents/developers.google.com/knowledge/howto
+uri: https://developers.google.com/knowledge/howto
+title: Search and retrieve documents
+description: The Developer Knowledge API and MCP server provide access to Google's developer knowledge.
+data_source: developers.google.com
+---
+
+This guide shows you how to use the Developer Knowledge API to programmatically search and retrieve Google's public developer documentation. Instead of manually scraping web pages, the API helps your applications find relevant text snippets or fetch full Markdown documents.
+
+In this document, you'll find examples for the following tasks:
+
+  - Searching the documentation corpus.
+  - Paginating through search results.
+  - Applying complex filters to your search.
+  - Retrieving full document content.
+  - Optimizing response payloads to reduce latency.
+
+Before you begin, make sure that you've [enabled the API and generated a Developer Knowledge API key](https://developers.google.com/knowledge/api#authentication) . Then, save your key to an environment variable:
+
+    export DEVELOPERKNOWLEDGE_API_KEY="YOUR_API_KEY"
+
+> **Tip:** If you need synthesized, natural-language answers grounded in documentation rather than raw excerpts, see [Answer queries with grounded generation](https://developers.google.com/knowledge/answer-query) .
+
+## Search for documents with `SearchDocumentChunks`
+
+Use the [`documents.searchDocumentChunks`](https://developers.google.com/knowledge/reference/rest/v1/documents/searchDocumentChunks) method to find document chunks that match a query string. The results include chunks of content from matching documents, alongside a `parent` reference that you can use to retrieve the full content of those documents.
+
+The following example searches for documents matching "BigQuery":
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+The output is similar to the following:
+
+    {
+      "results": [
+        {
+          "parent": "documents/docs.cloud.google.com/bigquery/docs/introduction",
+          "id": "chunk_0",
+          "content": "BigQuery is a fully managed enterprise data warehouse...",
+          "document": {
+            "name": "documents/docs.cloud.google.com/bigquery/docs/introduction",
+            "uri": "https://docs.cloud.google.com/bigquery/docs/introduction",
+            "title": "BigQuery overview",
+            "dataSource": "docs.cloud.google.com",
+            "updateTime": "2025-01-15T12:00:00Z"
+          },
+          "relevanceScore": 0.92
+        }
+      ]
+    }
+
+Each result in the `results` list includes:
+
+  - `parent` : the document resource name (for example, `documents/docs.cloud.google.com/bigquery/docs/introduction` ).
+  - `id` : the chunk identifier within the document (for example, `chunk_0` ).
+  - `content` : the matched text snippet from the document.
+  - `document` : metadata about the source document, such as its `title` , `uri` , `dataSource` , and `updateTime` .
+  - `relevanceScore` : the relevance score of the chunk to the search query, in the range `[0.0, 1.0]` .
+
+For more information about the response schema and all available metadata fields, see the [documents.searchDocumentChunks API reference](https://developers.google.com/knowledge/reference/rest/v1/documents/searchDocumentChunks#response-body) .
+
+## Paginate search results
+
+When a search query returns multiple matches, you can navigate through the result set using pagination parameters:
+
+  - `pageSize` (integer): specifies the maximum number of results to return per page. If unspecified, the API defaults to five results. The maximum allowed value is 100; values greater than 100 are coerced to 100.
+  - `pageToken` (string): specifies the token received in a previous response to fetch the next page of results.
+
+### Request the first page
+
+To set the page size, pass the `pageSize` parameter in your request:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&pageSize=5&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+If additional results are available, the response includes a `nextPageToken` :
+
+    {
+      "results": [
+        {
+          "parent": "documents/docs.cloud.google.com/bigquery/docs/introduction",
+          "id": "chunk_0",
+          "content": "BigQuery is a fully managed enterprise data warehouse...",
+          "document": {
+            "name": "documents/docs.cloud.google.com/bigquery/docs/introduction",
+            "uri": "https://docs.cloud.google.com/bigquery/docs/introduction",
+            "title": "What is BigQuery?",
+            "dataSource": "docs.cloud.google.com",
+            "updateTime": "2025-01-15T12:00:00Z",
+            "view": "DOCUMENT_VIEW_BASIC"
+          },
+          "relevanceScore": 0.88
+        }
+      ],
+      "nextPageToken": "CAUQABgB"
+    }
+
+### Retrieve subsequent pages
+
+Pass the value of `nextPageToken` to the `pageToken` parameter in your next request:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&pageSize=5&pageToken=CAUQABgB&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+When you reach the last page of results, `nextPageToken` is omitted from the response.
+
+## Filter search results
+
+Use the `filter` parameter to apply a strict filter to search results. The filter expression is applied to the metadata of the parent document for each chunk.
+
+The `filter` expression has a 500-character limit.
+
+### Supported fields
+
+You can filter your search results using the following parent document fields:
+
+  - `content_length_bytes` (integer): the length of the document's `content` field in bytes.
+  - `data_source` (string): the source domain of the document, such as `docs.cloud.google.com` or `firebase.google.com` . See the [corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) for all supported data sources.
+  - `update_time` (timestamp): the timestamp when the document was last updated. Values must use RFC 3339 format (for example, `"2025-01-01T00:00:00Z"` ).
+  - `uri` (string): the full URI of the document (for example, `https://docs.cloud.google.com/bigquery/docs/tables` ).
+
+### Supported operators
+
+The filter expression parser supports different operators depending on the field's data type:
+
+  - **String fields** ( `data_source` , `uri` ): support `=` (equals) and `!=` (not equals) for exact string matching. Partial, prefix, and regular expression matches aren't supported.
+  - **Timestamp fields** ( `update_time` ): support `=` , `<` , `<=` , `>` , and `>=` .
+  - **Integer fields** ( `content_length_bytes` ): support `=` , `!=` , `<` , `<=` , `>` , and `>=` .
+  - **Logical operators** : combine conditions using `AND` , `OR` , and `NOT` (or `-` ).
+
+> **Note:** `OR` has higher precedence than `AND` . Use parentheses `(...)` for explicit grouping to ensure conditions evaluate in the order you intend.
+
+### Filter examples
+
+The following examples demonstrate how to construct filter expressions. When calling the REST API with `curl` , make sure to URL-encode the filter parameter or use `--data-urlencode` .
+
+#### Match multiple data sources
+
+Use `OR` to include documents from multiple sources:
+
+    data_source = "docs.cloud.google.com" OR data_source = "firebase.google.com"
+
+`curl` request:
+
+    curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
+      --data-urlencode "query=database" \
+      --data-urlencode 'filter=data_source = "docs.cloud.google.com" OR data_source = "firebase.google.com"' \
+      --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+#### Filter by timestamp
+
+Use comparison operators with RFC 3339 timestamps to find content updated after a specific date:
+
+    update_time >= "2025-01-01T00:00:00Z"
+
+`curl` request:
+
+    curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
+      --data-urlencode "query=BigQuery" \
+      --data-urlencode 'filter=update_time >= "2025-01-01T00:00:00Z"' \
+      --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+#### Filter by content length
+
+Use comparison operators with `content_length_bytes` to find documents based on their byte size:
+
+    content_length_bytes < 5000
+
+`curl` request:
+
+    curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
+      --data-urlencode "query=Cloud Storage" \
+      --data-urlencode 'filter=content_length_bytes < 5000' \
+      --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+#### Combine data source, timestamp, and grouping
+
+Combine `AND` , `OR` , and parentheses `(...)` to restrict results to specific sources updated after a given date:
+
+    (data_source = "developer.chrome.com" OR data_source = "web.dev") AND update_time >= "2025-01-01T00:00:00Z"
+
+`curl` request:
+
+    curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
+      --data-urlencode "query=service worker" \
+      --data-urlencode 'filter=(data_source = "developer.chrome.com" OR data_source = "web.dev") AND update_time >= "2025-01-01T00:00:00Z"' \
+      --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+#### Exclude data sources
+
+Use `NOT` or `!=` to exclude results from a specific source:
+
+    data_source != "firebase.google.com"
+
+`curl` request:
+
+    curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
+      --data-urlencode "query=authentication" \
+      --data-urlencode 'filter=data_source != "firebase.google.com"' \
+      --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+## Retrieve a document with `GetDocument`
+
+Use the [`documents.get`](https://developers.google.com/knowledge/reference/rest/v1/documents/get) method to retrieve the full content of a single document.
+
+### Resource names versus URIs
+
+When referencing documents in the Developer Knowledge API, note the difference between resource names and web URIs:
+
+  - **Resource name** ( `parent` , `name` ): formatted as `documents/{uri_without_scheme}` (for example, `documents/docs.cloud.google.com/storage/docs/creating-buckets` ). Pass this value as the path parameter in `GetDocument` or in the `names` parameter of `BatchGetDocuments` .
+  - **Web URI** ( `uri` ): full web URL including the scheme (for example, `https://docs.cloud.google.com/storage/docs/creating-buckets` ). Use this format for the `uri` field when constructing `filter` expressions (for example, `uri = "https://docs.cloud.google.com/storage/docs/creating-buckets"` ).
+
+The following example retrieves a document by its resource name:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents/docs.cloud.google.com/storage/docs/creating-buckets?key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+The response is a [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) resource containing metadata and the full Markdown content in the `content` field.
+
+## Retrieve multiple documents with `BatchGetDocuments`
+
+Use the [`documents.batchGet`](https://developers.google.com/knowledge/reference/rest/v1/documents/batchGet) method to retrieve up to 20 documents by name in a single API call. This is more efficient than making multiple `GetDocument` requests.
+
+The following example retrieves two documents by name:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:batchGet?names=documents/docs.cloud.google.com/storage/docs/creating-buckets&names=documents/firebase.google.com/docs/firestore/quickstart&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+The response contains a list of the requested [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) resources in the order you requested.
+
+## Optimize response payloads
+
+Document content in Markdown format can be large. If your application only needs metadata (such as page titles, URIs, or timestamps) or specific fields, you can optimize payload sizes to reduce bandwidth and latency.
+
+### Use document views
+
+The `view` parameter controls which fields are populated in [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) messages.
+
+The [`DocumentView`](https://developers.google.com/knowledge/reference/rest/v1/documents#DocumentView) enum supports the following values:
+
+  - `DOCUMENT_VIEW_BASIC` : returns only basic metadata fields ( `name` , `uri` , `data_source` , `title` , `description` , `update_time` , and `view` ). The `content` field is omitted.
+  - `DOCUMENT_VIEW_CONTENT` : returns metadata fields along with the Markdown `content` field. This is the default for `GetDocument` and `BatchGetDocuments` .
+  - `DOCUMENT_VIEW_FULL` : returns all document fields.
+
+To retrieve only document metadata without downloading large Markdown content, set `view=DOCUMENT_VIEW_BASIC` :
+
+    curl "https://developerknowledge.googleapis.com/v1/documents/docs.cloud.google.com/storage/docs/creating-buckets?view=DOCUMENT_VIEW_BASIC&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+You can also use `view=DOCUMENT_VIEW_BASIC` with `BatchGetDocuments` :
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:batchGet?names=documents/docs.cloud.google.com/storage/docs/creating-buckets&names=documents/firebase.google.com/docs/firestore/quickstart&view=DOCUMENT_VIEW_BASIC&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+### Use field masks
+
+To further limit response payloads to specific fields, use the standard Google APIs [`fields` query parameter (field mask)](https://google.aip.dev/157#field-masks-parameter) .
+
+#### Filter fields in `GetDocument`
+
+To retrieve only the `title` , `uri` , and `updateTime` fields of a document:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents/docs.cloud.google.com/storage/docs/creating-buckets?fields=title,uri,updateTime&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+#### Filter fields in `BatchGetDocuments`
+
+To retrieve only specific fields for each document in a batch:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:batchGet?names=documents/docs.cloud.google.com/storage/docs/creating-buckets&fields=documents(name,title,uri)&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+#### Filter fields in `SearchDocumentChunks`
+
+To return only the chunk `id` and `content` , parent document `title` and `uri` , and the `nextPageToken` from a search:
+
+    curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&fields=results(id,content,document(title,uri)),nextPageToken&key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+## Handle errors
+
+The Developer Knowledge API returns standard HTTP status codes. The following functional examples map HTTP status codes and their causes in the Developer Knowledge API:
+
+  - **`400 INVALID_ARGUMENT`** :
+      - The `filter` expression string exceeds 500 characters.
+      - The `update_time` timestamp is invalid (must use RFC 3339 format).
+      - More than 20 document names were provided in a `BatchGetDocuments` request.
+  - **`401 UNAUTHENTICATED`** : the request is missing an API key or uses an invalid key. See [Authentication](https://developers.google.com/knowledge/api#authentication) .
+  - **`404 NOT_FOUND`** : the requested document name does not exist or belongs to a domain that isn't included in the corpus.
+  - **`429 RESOURCE_EXHAUSTED`** : the project has exceeded its quota. See [Quota and limits](https://developers.google.com/knowledge/quota) .
+
+## What's next
+
+  - See [Answer queries with grounded generation](https://developers.google.com/knowledge/answer-query) .
+  - Explore how to [use client libraries](https://developers.google.com/knowledge/quickstart-client-libraries) in Python, Node.js, Go, or Java.
+  - Browse the [corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.
+  - Review the [REST API reference](https://developers.google.com/knowledge/reference/rest) for complete method specifications.
+  - Check [quota and limits](https://developers.google.com/knowledge/quota) for API rate limits and quotas.
