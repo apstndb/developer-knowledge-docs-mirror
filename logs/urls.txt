@@ -2,7 +2,7 @@ https://developers.google.com/knowledge/answer-query	2026-07-17T07:17:44Z
 https://developers.google.com/knowledge/api	2026-08-05T16:15:22Z
 https://developers.google.com/knowledge/error-handling-and-limits	2026-09-03T03:54:41Z
 https://developers.google.com/knowledge/howto	2026-08-21T23:06:46Z
-https://developers.google.com/knowledge/mcp	2026-09-16T17:08:28Z
+https://developers.google.com/knowledge/mcp	2026-09-19T09:11:31Z
 https://developers.google.com/knowledge/quickstart	2026-07-17T07:17:44Z
 https://developers.google.com/knowledge/quickstart-client-libraries	2026-09-16T01:57:35Z
 https://developers.google.com/knowledge/quota	2026-08-04T17:06:04Z
