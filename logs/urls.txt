@@ -27,9 +27,9 @@ https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchD
 https://developers.google.com/knowledge/reference/rpc	2026-07-17T07:13:12Z
 https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1	2026-08-27T17:07:27Z
 https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1alpha	2026-08-19T19:02:22Z
-https://developers.google.com/knowledge/release-notes	2026-09-09T15:24:15Z
-https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge	2026-09-09T14:48:36Z
-https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query	2026-09-09T14:48:45Z
-https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents	2026-09-09T14:48:45Z
-https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe	2026-09-09T14:48:45Z
-https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks	2026-09-09T14:48:57Z
+https://developers.google.com/knowledge/release-notes	2026-09-22T20:09:42Z
+https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge	2026-09-22T17:18:31Z
+https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query	2026-09-22T17:17:42Z
+https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents	2026-09-22T17:18:01Z
+https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe	2026-09-22T17:18:31Z
+https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks	2026-09-22T17:18:01Z

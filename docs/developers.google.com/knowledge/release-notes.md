@@ -8,9 +8,16 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## September 22, 2026
+
+  - add\_circle [`gcloud developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge) commands are generally available (GA) in the [`gcloud` CLI](https://cloud.google.com/sdk) .
+      - [`gcloud developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/answer-query) : Get answers to queries grounded in developer documentation.
+      - [`gcloud developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
+      - [`gcloud developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
+
 ## September 9, 2026
 
-  - add\_circle [`gcloud beta developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge) commands are available in the 'beta' component of the [gcloud CLI](https://cloud.google.com/sdk) .
+  - add\_circle [`gcloud beta developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge) commands are available in the 'beta' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
       - [`gcloud beta developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/answer-query) : Get answers to queries grounded in developer documentation.
       - [`gcloud beta developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
       - [`gcloud beta developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
@@ -33,7 +40,7 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## August 18, 2026
 
-  - add\_circle (v1alpha) [`gcloud alpha developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge) commands are available in the 'alpha' component of the [gcloud CLI](https://cloud.google.com/sdk) .
+  - add\_circle (v1alpha) [`gcloud alpha developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge) commands are available in the 'alpha' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
       - [`gcloud alpha developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query) : Get answers to queries grounded in developer documentation.
       - [`gcloud alpha developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
       - [`gcloud alpha developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.

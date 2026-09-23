@@ -54,6 +54,8 @@ Use `answer-query` to get synthesized natural language answers with source citat
 
 NOTES
 
-This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. This variant is also available:
+This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. These variants are also available:
+
+    gcloud developer-knowledge answer-query
 
     gcloud beta developer-knowledge answer-query
