@@ -35,9 +35,9 @@ Before you start using the Developer Knowledge API, make sure you complete the f
 
 5.  Click **Create** .
 
-## Answer a query with grounded generation
+## Generate answers from documentation
 
-Once you have your Developer Knowledge API key, you can start using the API. The following example shows how to ask a query and get an answer grounded in the documentation:
+Once you have your Developer Knowledge API key, you can start using the API. The following example shows how to ask a query and generate an answer drawn from the documentation:
 
 1.  Save your Developer Knowledge API key to an environment variable:
     

@@ -11,14 +11,14 @@ This page provides information about updates to the Developer Knowledge API and 
 ## September 22, 2026
 
   - add\_circle [`gcloud developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge) commands are generally available (GA) in the [`gcloud` CLI](https://cloud.google.com/sdk) .
-      - [`gcloud developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/answer-query) : Get answers to queries grounded in developer documentation.
+      - [`gcloud developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/answer-query) : Generate answers to queries drawn from developer documentation.
       - [`gcloud developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
       - [`gcloud developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
 
 ## September 9, 2026
 
   - add\_circle [`gcloud beta developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge) commands are available in the 'beta' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
-      - [`gcloud beta developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/answer-query) : Get answers to queries grounded in developer documentation.
+      - [`gcloud beta developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/answer-query) : Generate answers to queries drawn from developer documentation.
       - [`gcloud beta developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
       - [`gcloud beta developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
 
@@ -41,7 +41,7 @@ This page provides information about updates to the Developer Knowledge API and 
 ## August 18, 2026
 
   - add\_circle (v1alpha) [`gcloud alpha developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge) commands are available in the 'alpha' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
-      - [`gcloud alpha developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query) : Get answers to queries grounded in developer documentation.
+      - [`gcloud alpha developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query) : Generate answers to queries drawn from developer documentation.
       - [`gcloud alpha developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
       - [`gcloud alpha developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
 
@@ -56,7 +56,7 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## July 17, 2026
 
-  - add\_circle The `AnswerQuery` endpoint is now Generally Available (GA). For more information, see [Answer queries with grounded generation](https://developers.google.com/knowledge/answer-query) .
+  - add\_circle The `AnswerQuery` endpoint is now Generally Available (GA). For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
 ## July 9, 2026
 
@@ -75,7 +75,7 @@ This page provides information about updates to the Developer Knowledge API and 
 
   - add\_circle [`AnswerQuery`](https://developers.google.com/knowledge/answer-query) responses now include `references` and `citations` for the provided answer.
     
-    For more information, see [Answer queries in grounded generation](https://developers.google.com/knowledge/answer-query) .
+    For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
 ## May 20, 2026
 
@@ -90,9 +90,9 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## April 20, 2026
 
-  - add\_circle The Developer Knowledge API now supports the `AnswerQuery` method, which lets you get answers to queries that are grounded in the [Developer Knowledge API corpus](https://developers.google.com/knowledge/reference/corpus-reference) .
+  - add\_circle The Developer Knowledge API now supports the `AnswerQuery` method, which lets you generate answers to queries drawn from the [Developer Knowledge API corpus](https://developers.google.com/knowledge/reference/corpus-reference) .
     
-    For more information, see [Answer queries in grounded generation](https://developers.google.com/knowledge/answer-query) .
+    For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
 ## April 16, 2026
 

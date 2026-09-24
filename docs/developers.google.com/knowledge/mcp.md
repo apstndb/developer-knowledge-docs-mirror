@@ -16,11 +16,11 @@ The Google Developer Knowledge MCP server provides three core tools to your AI c
 | ------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | `search_documents` | Searches Google developer documentation and returns the most relevant page excerpts alongside their document names. |
 | `get_documents`    | Retrieves the full Markdown content of documents using the names returned by `search_documents` .                   |
-| `answer_query`     | Generates structured, synthesized answers grounded in the Developer Knowledge corpus.                               |
+| `answer_query`     | Generates structured answers drawn from the Developer Knowledge corpus.                                             |
 
 The `search_documents` tool searches Google's documentation to find the most relevant sections matching your query. When you ask a question, the tool returns short text passages. If your agent needs the complete page context surrounding a passage, it can pass the document's resource name to `get_documents` to retrieve the entire page.
 
-Use the `answer_query` tool when you want a direct answer to a question synthesized from the [Developer Knowledge corpus](https://developers.google.com/knowledge/reference/corpus-reference) rather than raw search results or full Markdown files.
+Use the `answer_query` tool when you want a direct answer to a question drawn from the [Developer Knowledge corpus](https://developers.google.com/knowledge/reference/corpus-reference) rather than raw search results or full Markdown files.
 
 ## Choose your authentication method
 
@@ -315,7 +315,7 @@ To ensure fast and cost-effective responses, follow these prompt engineering bes
 
   - **Rely on two-step retrieval** : Let the agent start by calling `search_documents` . This returns focused snippets (chunks) that often contain the exact syntax or API signature you need without consuming tokens for the entire page. Instruct your agent to call `get_documents` only when surrounding context is strictly necessary.
 
-  - **Prefer `answer_query` for conceptual questions** : When you need a synthesized explanation or design comparison, direct your agent to use `answer_query` . This tool synthesizes an answer directly from the Developer Knowledge corpus without returning full raw Markdown pages.
+  - **Prefer `answer_query` for conceptual questions** : When you need a generated explanation or design comparison, direct your agent to use `answer_query` . This tool generates an answer directly from the Developer Knowledge corpus without returning full raw Markdown pages.
 
   - **Write specific, scoped prompts** : Avoid overly broad prompts such as "Explain all of Firebase". Instead, specify the target product, platform, and language:
     
@@ -368,7 +368,7 @@ See the following example command:
     --malicious-uri-filter-settings-enforcement=ENABLED \
     --add-rai-settings-filters='[{"confidenceLevel": "MEDIUM_AND_ABOVE", "filterType": "DANGEROUS"}]'
 
-Replace `  PROJECT_ID  ` with your project ID.
+Replace `  PROJECT_ID  ` with your Google Cloud project ID.
 
 Note the following settings:
 
@@ -384,7 +384,7 @@ To stop Model Armor from automatically scanning traffic to and from Google MCP s
       --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
       --remove-integrated-services=GOOGLE_MCP_SERVER
 
-Replace `  PROJECT_ID  ` with the project ID. Model Armor doesn't automatically apply the rules defined in this project's floor settings to any Google MCP server traffic.
+Replace `  PROJECT_ID  ` with the Google Cloud project ID. Model Armor doesn't automatically apply the rules defined in this project's floor settings to any Google MCP server traffic.
 
 Model Armor floor settings and general configuration can impact more than just MCP. Because Model Armor integrates with services like Vertex AI, any changes you make to floor settings can affect traffic scanning and safety behaviors across all integrated services, not just MCP.
 

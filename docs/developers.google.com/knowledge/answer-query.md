@@ -1,28 +1,47 @@
 ---
 name: documents/developers.google.com/knowledge/answer-query
 uri: https://developers.google.com/knowledge/answer-query
-title: Answer queries with grounded generation
+title: Generate answers from documentation
 description: The Developer Knowledge API and MCP server provide access to Google's developer knowledge.
 data_source: developers.google.com
 ---
 
-Use the `AnswerQuery` method to get answers to queries that are grounded in the [Developer Knowledge corpus](https://developers.google.com/knowledge/reference/corpus-reference) .
+The Developer Knowledge API lets you ask questions about Google developer products and receive direct, natural-language answers. For each query, the API composes a response drawn from the [Developer Knowledge corpus](https://developers.google.com/knowledge/reference/corpus-reference) (referred to in the API reference as *grounded generation* ) and includes citations to the relevant documentation pages.
 
 ## Before you begin
 
-Make sure you have [enabled the API and generated a Developer Knowledge API key](https://developers.google.com/knowledge/api#authentication) , and save your key to an environment variable:
+Set up your environment for your preferred tool:
+
+### gcloud
+
+[Install and configure the gcloud CLI, and enable the Developer Knowledge API](https://developers.google.com/knowledge/quickstart-gcloud#before-you-begin) .
+
+### REST
+
+[Enable the API and generate a Developer Knowledge API key](https://developers.google.com/knowledge/quickstart#before-you-begin) . Then, save your key to an environment variable:
 
     export DEVELOPERKNOWLEDGE_API_KEY="YOUR_API_KEY"
 
-## Example usage
+Replace `  YOUR_API_KEY  ` with your Developer Knowledge API key.
 
-The following example asks "How do I create a BigQuery dataset?":
+## Answer a query
+
+Use the [`gcloud developer-knowledge answer-query` command](https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/answer-query) or the [`answerQuery`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery) REST method to ask a question.
+
+The following example sends a query asking how to create a BigQuery dataset:
+
+### gcloud
+
+    gcloud developer-knowledge answer-query \
+      --query="How do I create a BigQuery dataset?"
+
+### REST
 
     curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery?key=$DEVELOPERKNOWLEDGE_API_KEY" \
       -H "Content-Type: application/json" \
       -d '{"query": "How do I create a BigQuery dataset?"}'
 
-The response contains the text answer in the `answer.answer_text` field, along with `citations` and `references` in the [`answer`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery#answer) object:
+The response contains the text answer in the `answer.answerText` field, along with `citations` and `references` in the [`answer`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery#answer) object:
 
     {
       "answer": {
@@ -42,12 +61,12 @@ The response contains the text answer in the `answer.answer_text` field, along w
           {
             "documentReference": {
               "documentChunk": {
-                "parent": "documents/cloud.google.com/bigquery/docs/datasets",
+                "parent": "documents/docs.cloud.google.com/bigquery/docs/datasets",
                 "content": "This page explains how to create BigQuery datasets...",
                 "document": {
-                  "name": "documents/cloud.google.com/bigquery/docs/datasets",
+                  "name": "documents/docs.cloud.google.com/bigquery/docs/datasets",
                   "title": "Introduction to datasets",
-                  "uri": "https://cloud.google.com/bigquery/docs/datasets"
+                  "uri": "https://docs.cloud.google.com/bigquery/docs/datasets"
                 }
               }
             }
@@ -55,3 +74,24 @@ The response contains the text answer in the `answer.answer_text` field, along w
         ]
       }
     }
+
+## Filter documentation sources
+
+To restrict the documentation sources used to generate the answer, pass a filter expression using the `--query-filter` flag in the gcloud CLI or the `filter` field in your REST request body. For details on supported filter fields and operators, see [Filter search results](https://developers.google.com/knowledge/howto#filter-results) .
+
+The following example restricts the documentation sources to `docs.cloud.google.com` :
+
+### gcloud
+
+    gcloud developer-knowledge answer-query \
+      --query="How do I create a BigQuery dataset?" \
+      --query-filter='data_source = "docs.cloud.google.com"'
+
+### REST
+
+    curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery?key=$DEVELOPERKNOWLEDGE_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "query": "How do I create a BigQuery dataset?",
+        "filter": "data_source = \"docs.cloud.google.com\""
+      }'

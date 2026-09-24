@@ -14,7 +14,7 @@ The Developer Knowledge API is designed to be the canonical source for machine-r
 
   - [`SearchDocumentChunks`](https://developers.google.com/knowledge/reference/rest/v1/documents/searchDocumentChunks) to find relevant page URIs and content snippets based on a query.
   - [`GetDocument`](https://developers.google.com/knowledge/reference/rest/v1/documents/get) or [`BatchGetDocuments`](https://developers.google.com/knowledge/reference/rest/v1/documents/batchGet) to fetch the full content of the search result(s).
-  - [`AnswerQuery`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery) to get answers to queries grounded in the documentation corpus.
+  - [`AnswerQuery`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery) to generate answers to queries drawn from the documentation corpus.
 
 To get started quickly, follow the [Quickstart guide](https://developers.google.com/knowledge/quickstart) .
 
@@ -34,24 +34,10 @@ To use the Developer Knowledge API, you first need to enable it for your Google 
 
 ## Authentication
 
-A Developer Knowledge API key is required to use the Developer Knowledge API. To create one:
+You can authenticate requests to the Developer Knowledge API using one of the following methods:
 
-1.  In the Google Cloud console for the project in which you enabled the API, go to the [Credentials page](https://console.cloud.google.com/apis/credentials) .
-
-2.  Click **Create credentials** , and then select **API key** from the menu.
-
-3.  In the **Name** field, provide a name for the key.
-
-4.  Click the **Select API restrictions** drop-down, and then type **Developer Knowledge API** . Click the result, and then click **OK** .
-    
-    **Notes:**
-    
-      - If you just enabled the Developer Knowledge API, there may be a delay before it appears in the list. Wait a few minutes and try again.
-      - If you plan to use this same key for your AI client's general model calls (for example, `GEMINI_API_KEY` ), you must also select **Generative Language API** . Otherwise, those calls will be blocked.
-
-5.  Click **Create** .
-
-Include this Developer Knowledge API key in your requests. For example, REST calls should include it using the `key` query parameter. Refer to the [Quickstart guide](https://developers.google.com/knowledge/quickstart) for an example.
+  - **API key** : authenticate direct REST requests using the `key` query parameter or the `X-Goog-Api-Key` header. Refer to the [REST quickstart](https://developers.google.com/knowledge/quickstart) for an example.
+  - **Application Default Credentials (ADC), OAuth 2.0, or service accounts** : authenticate requests when using the official [client libraries](https://developers.google.com/knowledge/quickstart-client-libraries) or production workflows. To learn more about setting up credentials, refer to the [Application Default Credentials documentation](https://cloud.google.com/docs/authentication/provide-credentials-adc) .
 
 ## Included documentation
 

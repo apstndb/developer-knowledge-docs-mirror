@@ -53,9 +53,9 @@ To install the official Developer Knowledge API client library, select your prog
       <version>0.3.0</version>
     </dependency>
 
-## Answer a query with grounded generation
+## Generate answers from documentation
 
-The `AnswerQuery` endpoint answers complex, natural-language questions, such as those involving code setup, troubleshooting procedures, and product capabilities, by synthesizing information across multiple official documentation sources.
+The `AnswerQuery` endpoint answers complex, natural-language questions, such as those involving code setup, troubleshooting procedures, and product capabilities, by pulling information from official documentation sources.
 
 Select a language tab to view an example of how to call `AnswerQuery` :
 
@@ -202,7 +202,7 @@ def answer_query(
 
 ## Search for document chunks
 
-To find precise, localized text segments within the documentation rather than a synthesized answer, use the `SearchDocumentChunks` endpoint. This method scans the corpus and returns individual content snippets (chunks) alongside parent document identifiers, which you can use to retrieve the full document content.
+To find precise, localized text segments within the documentation rather than a generated answer, use the `SearchDocumentChunks` endpoint. This method scans the corpus and returns individual content snippets (chunks) alongside parent document identifiers, which you can use to retrieve the full document content.
 
 Select a language tab to view an example of how to search document chunks:
 

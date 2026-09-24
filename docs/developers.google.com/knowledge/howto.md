@@ -6,7 +6,7 @@ description: The Developer Knowledge API and MCP server provide access to Google
 data_source: developers.google.com
 ---
 
-This guide shows you how to use the Developer Knowledge API to programmatically search and retrieve Google's public developer documentation. Instead of manually scraping web pages, the API helps your applications find relevant text snippets or fetch full Markdown documents.
+This document shows you how to use the Developer Knowledge API to programmatically search and retrieve Google's public developer documentation. Instead of manually scraping web pages, the API helps your applications find relevant text snippets or fetch full Markdown documents.
 
 In this document, you'll find examples for the following tasks:
 
@@ -16,17 +16,34 @@ In this document, you'll find examples for the following tasks:
   - Retrieving full document content.
   - Optimizing response payloads to reduce latency.
 
-Before you begin, make sure that you've [enabled the API and generated a Developer Knowledge API key](https://developers.google.com/knowledge/api#authentication) . Then, save your key to an environment variable:
+Before you begin, set up your environment for your preferred tool:
+
+### gcloud
+
+[Install and configure the gcloud CLI, and enable the Developer Knowledge API](https://developers.google.com/knowledge/quickstart-gcloud#before-you-begin) .
+
+### REST
+
+[Enable the API and generate a Developer Knowledge API key](https://developers.google.com/knowledge/quickstart#before-you-begin) . Then, save your key to an environment variable:
 
     export DEVELOPERKNOWLEDGE_API_KEY="YOUR_API_KEY"
 
-> **Tip:** If you need synthesized, natural-language answers grounded in documentation rather than raw excerpts, see [Answer queries with grounded generation](https://developers.google.com/knowledge/answer-query) .
+Replace `  YOUR_API_KEY  ` with your Developer Knowledge API key.
 
-## Search for documents with `SearchDocumentChunks`
+> **Tip:** If you need generated, natural-language answers drawn from documentation rather than raw excerpts, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
-Use the [`documents.searchDocumentChunks`](https://developers.google.com/knowledge/reference/rest/v1/documents/searchDocumentChunks) method to find document chunks that match a query string. The results include chunks of content from matching documents, alongside a `parent` reference that you can use to retrieve the full content of those documents.
+## Search for documents
+
+Use the [`gcloud developer-knowledge documents search-chunks` command](https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/search-chunks) or the [`documents.searchDocumentChunks`](https://developers.google.com/knowledge/reference/rest/v1/documents/searchDocumentChunks) REST method to find document chunks that match a query string. The results include chunks of content from matching documents, alongside a `parent` reference that you can use to retrieve the full content of those documents.
 
 The following example searches for documents matching "BigQuery":
+
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="BigQuery"
+
+### REST
 
     curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&key=$DEVELOPERKNOWLEDGE_API_KEY"
 
@@ -64,50 +81,58 @@ For more information about the response schema and all available metadata fields
 
 When a search query returns multiple matches, you can navigate through the result set using pagination parameters:
 
-  - `pageSize` (integer): specifies the maximum number of results to return per page. If unspecified, the API defaults to five results. The maximum allowed value is 100; values greater than 100 are coerced to 100.
-  - `pageToken` (string): specifies the token received in a previous response to fetch the next page of results.
+  - `--page-size` (gcloud CLI) or `pageSize` (integer): specifies the maximum number of results to return per page. If unspecified, the API defaults to five results. The maximum allowed value is 100; values greater than 100 are coerced to 100.
 
-### Request the first page
+  - `--limit` (gcloud CLI) or `pageToken` (string): in the gcloud CLI, use `--limit` to control the total number of results returned across pages. In REST requests, pass the `pageToken` value received in a previous response to fetch the next page of results.
 
-To set the page size, pass the `pageSize` parameter in your request:
+### gcloud
 
-    curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&pageSize=5&key=$DEVELOPERKNOWLEDGE_API_KEY"
+Pass the `--page-size` and `--limit` flags to control the number of results per page and the total number of results returned:
 
-If additional results are available, the response includes a `nextPageToken` :
+    gcloud developer-knowledge documents search-chunks \
+      --query="BigQuery" \
+      --page-size=5 \
+      --limit=10
 
-    {
-      "results": [
+### REST
+
+1.  To request the first page, pass the `pageSize` parameter in your request:
+    
+        curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&pageSize=5&key=$DEVELOPERKNOWLEDGE_API_KEY"
+    
+    If additional results are available, the response includes a `nextPageToken` :
+    
         {
-          "parent": "documents/docs.cloud.google.com/bigquery/docs/introduction",
-          "id": "chunk_0",
-          "content": "BigQuery is a fully managed enterprise data warehouse...",
-          "document": {
-            "name": "documents/docs.cloud.google.com/bigquery/docs/introduction",
-            "uri": "https://docs.cloud.google.com/bigquery/docs/introduction",
-            "title": "What is BigQuery?",
-            "dataSource": "docs.cloud.google.com",
-            "updateTime": "2025-01-15T12:00:00Z",
-            "view": "DOCUMENT_VIEW_BASIC"
-          },
-          "relevanceScore": 0.88
+          "results": [
+            {
+              "parent": "documents/docs.cloud.google.com/bigquery/docs/introduction",
+              "id": "chunk_0",
+              "content": "BigQuery is a fully managed enterprise data warehouse...",
+              "document": {
+                "name": "documents/docs.cloud.google.com/bigquery/docs/introduction",
+                "uri": "https://docs.cloud.google.com/bigquery/docs/introduction",
+                "title": "What is BigQuery?",
+                "dataSource": "docs.cloud.google.com",
+                "updateTime": "2025-01-15T12:00:00Z",
+                "view": "DOCUMENT_VIEW_BASIC"
+              },
+              "relevanceScore": 0.88
+            }
+          ],
+          "nextPageToken": "CAUQABgB"
         }
-      ],
-      "nextPageToken": "CAUQABgB"
-    }
 
-### Retrieve subsequent pages
-
-Pass the value of `nextPageToken` to the `pageToken` parameter in your next request:
-
-    curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&pageSize=5&pageToken=CAUQABgB&key=$DEVELOPERKNOWLEDGE_API_KEY"
-
-When you reach the last page of results, `nextPageToken` is omitted from the response.
+2.  To retrieve subsequent pages, pass the value of `nextPageToken` to the `pageToken` parameter in your next request:
+    
+        curl "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks?query=BigQuery&pageSize=5&pageToken=CAUQABgB&key=$DEVELOPERKNOWLEDGE_API_KEY"
+    
+    When you reach the last page of results, `nextPageToken` is omitted from the response.
 
 ## Filter search results
 
-Use the `filter` parameter to apply a strict filter to search results. The filter expression is applied to the metadata of the parent document for each chunk.
+Use the `--query-filter` flag in the gcloud CLI or the `filter` parameter in REST requests to apply a strict filter to search results. The filter expression is applied to the metadata of the parent document for each chunk.
 
-The `filter` expression has a 500-character limit.
+The filter expression has a 500-character limit.
 
 ### Supported fields
 
@@ -127,11 +152,30 @@ The filter expression parser supports different operators depending on the field
   - **Integer fields** ( `content_length_bytes` ): support `=` , `!=` , `<` , `<=` , `>` , and `>=` .
   - **Logical operators** : combine conditions using `AND` , `OR` , and `NOT` (or `-` ).
 
-> **Note:** `OR` has higher precedence than `AND` . Use parentheses `(...)` for explicit grouping to ensure conditions evaluate in the order you intend.
+> **Note:** `OR` has higher precedence than `AND` . Use parentheses `(...)` for explicit grouping to make sure that conditions evaluate in the order you intend.
 
 ### Filter examples
 
-The following examples demonstrate how to construct filter expressions. When calling the REST API with `curl` , make sure to URL-encode the filter parameter or use `--data-urlencode` .
+The following examples demonstrate how to construct filter expressions. When using the gcloud CLI, pass the expression to the `--query-filter` flag. When calling the REST API with `curl` , make sure to URL-encode the `filter` parameter or use `--data-urlencode` .
+
+#### Match a single data source
+
+Restrict search results to a single documentation domain:
+
+    data_source = "docs.cloud.google.com"
+
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="Cloud Functions deployment" \
+      --query-filter='data_source = "docs.cloud.google.com"'
+
+### REST
+
+    curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
+      --data-urlencode "query=Cloud Functions deployment" \
+      --data-urlencode 'filter=data_source = "docs.cloud.google.com"' \
+      --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
 
 #### Match multiple data sources
 
@@ -139,7 +183,13 @@ Use `OR` to include documents from multiple sources:
 
     data_source = "docs.cloud.google.com" OR data_source = "firebase.google.com"
 
-`curl` request:
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="database" \
+      --query-filter='data_source = "docs.cloud.google.com" OR data_source = "firebase.google.com"'
+
+### REST
 
     curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
       --data-urlencode "query=database" \
@@ -152,7 +202,13 @@ Use comparison operators with RFC 3339 timestamps to find content updated after 
 
     update_time >= "2025-01-01T00:00:00Z"
 
-`curl` request:
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="BigQuery" \
+      --query-filter='update_time >= "2025-01-01T00:00:00Z"'
+
+### REST
 
     curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
       --data-urlencode "query=BigQuery" \
@@ -165,7 +221,13 @@ Use comparison operators with `content_length_bytes` to find documents based on 
 
     content_length_bytes < 5000
 
-`curl` request:
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="Cloud Storage" \
+      --query-filter='content_length_bytes < 5000'
+
+### REST
 
     curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
       --data-urlencode "query=Cloud Storage" \
@@ -178,7 +240,13 @@ Combine `AND` , `OR` , and parentheses `(...)` to restrict results to specific s
 
     (data_source = "developer.chrome.com" OR data_source = "web.dev") AND update_time >= "2025-01-01T00:00:00Z"
 
-`curl` request:
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="service worker" \
+      --query-filter='(data_source = "developer.chrome.com" OR data_source = "web.dev") AND update_time >= "2025-01-01T00:00:00Z"'
+
+### REST
 
     curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
       --data-urlencode "query=service worker" \
@@ -191,29 +259,42 @@ Use `NOT` or `!=` to exclude results from a specific source:
 
     data_source != "firebase.google.com"
 
-`curl` request:
+### gcloud
+
+    gcloud developer-knowledge documents search-chunks \
+      --query="authentication" \
+      --query-filter='data_source != "firebase.google.com"'
+
+### REST
 
     curl -G "https://developerknowledge.googleapis.com/v1/documents:searchDocumentChunks" \
       --data-urlencode "query=authentication" \
       --data-urlencode 'filter=data_source != "firebase.google.com"' \
       --data-urlencode "key=$DEVELOPERKNOWLEDGE_API_KEY"
 
-## Retrieve a document with `GetDocument`
+## Retrieve a document
 
-Use the [`documents.get`](https://developers.google.com/knowledge/reference/rest/v1/documents/get) method to retrieve the full content of a single document.
+Use the [`gcloud developer-knowledge documents describe` command](https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/describe) or the [`documents.get`](https://developers.google.com/knowledge/reference/rest/v1/documents/get) REST method to retrieve the full content of a single document.
+
+The following example retrieves a document by its resource name:
+
+### gcloud
+
+    gcloud developer-knowledge documents describe \
+      documents/docs.cloud.google.com/storage/docs/creating-buckets
+
+### REST
+
+    curl "https://developerknowledge.googleapis.com/v1/documents/docs.cloud.google.com/storage/docs/creating-buckets?key=$DEVELOPERKNOWLEDGE_API_KEY"
+
+The response is a [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) resource containing metadata and the full Markdown content in the `content` field.
 
 ### Resource names versus URIs
 
 When referencing documents in the Developer Knowledge API, note the difference between resource names and web URIs:
 
-  - **Resource name** ( `parent` , `name` ): formatted as `documents/{uri_without_scheme}` (for example, `documents/docs.cloud.google.com/storage/docs/creating-buckets` ). Pass this value as the path parameter in `GetDocument` or in the `names` parameter of `BatchGetDocuments` .
-  - **Web URI** ( `uri` ): full web URL including the scheme (for example, `https://docs.cloud.google.com/storage/docs/creating-buckets` ). Use this format for the `uri` field when constructing `filter` expressions (for example, `uri = "https://docs.cloud.google.com/storage/docs/creating-buckets"` ).
-
-The following example retrieves a document by its resource name:
-
-    curl "https://developerknowledge.googleapis.com/v1/documents/docs.cloud.google.com/storage/docs/creating-buckets?key=$DEVELOPERKNOWLEDGE_API_KEY"
-
-The response is a [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) resource containing metadata and the full Markdown content in the `content` field.
+  - **Resource name** ( `parent` , `name` ): formatted as `documents/{uri_without_scheme}` (for example, `documents/docs.cloud.google.com/storage/docs/creating-buckets` ). Pass this value as the positional argument in `gcloud developer-knowledge documents describe` , the path parameter in `GetDocument` , or in the `names` parameter of `BatchGetDocuments` .
+  - **Web URI** ( `uri` ): full web URL including the scheme (for example, `https://docs.cloud.google.com/storage/docs/creating-buckets` ). Use this format for the `uri` field when constructing `--query-filter` or `filter` expressions (for example, `uri = "https://docs.cloud.google.com/storage/docs/creating-buckets"` ).
 
 ## Retrieve multiple documents with `BatchGetDocuments`
 
@@ -231,15 +312,23 @@ Document content in Markdown format can be large. If your application only needs
 
 ### Use document views
 
-The `view` parameter controls which fields are populated in [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) messages.
+The `--view` flag in the gcloud CLI or the `view` parameter in REST requests controls which fields are populated in [`Document`](https://developers.google.com/knowledge/reference/rest/v1/documents#Document) messages.
 
-The [`DocumentView`](https://developers.google.com/knowledge/reference/rest/v1/documents#DocumentView) enum supports the following values:
+The `--view` flag and [`DocumentView`](https://developers.google.com/knowledge/reference/rest/v1/documents#DocumentView) enum support the following values:
 
-  - `DOCUMENT_VIEW_BASIC` : returns only basic metadata fields ( `name` , `uri` , `data_source` , `title` , `description` , `update_time` , and `view` ). The `content` field is omitted.
-  - `DOCUMENT_VIEW_CONTENT` : returns metadata fields along with the Markdown `content` field. This is the default for `GetDocument` and `BatchGetDocuments` .
-  - `DOCUMENT_VIEW_FULL` : returns all document fields.
+  - `--view=basic` (gcloud CLI) or `DOCUMENT_VIEW_BASIC` : returns only basic metadata fields ( `name` , `uri` , `dataSource` , `title` , `description` , `updateTime` , and `view` ). The `content` field is omitted.
+  - `--view=content` (gcloud CLI) or `DOCUMENT_VIEW_CONTENT` : returns metadata fields along with the Markdown `content` field. This is the default for `gcloud developer-knowledge documents describe` , `GetDocument` , and `BatchGetDocuments` .
+  - `--view=full` (gcloud CLI) or `DOCUMENT_VIEW_FULL` : returns all document fields.
 
-To retrieve only document metadata without downloading large Markdown content, set `view=DOCUMENT_VIEW_BASIC` :
+To retrieve only document metadata without downloading large Markdown content, specify the basic document view:
+
+### gcloud
+
+    gcloud developer-knowledge documents describe \
+      documents/docs.cloud.google.com/storage/docs/creating-buckets \
+      --view=basic
+
+### REST
 
     curl "https://developerknowledge.googleapis.com/v1/documents/docs.cloud.google.com/storage/docs/creating-buckets?view=DOCUMENT_VIEW_BASIC&key=$DEVELOPERKNOWLEDGE_API_KEY"
 
@@ -283,8 +372,9 @@ The Developer Knowledge API returns standard HTTP status codes. The following fu
 
 ## What's next
 
-  - See [Answer queries with grounded generation](https://developers.google.com/knowledge/answer-query) .
+  - See [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
   - Explore how to [use client libraries](https://developers.google.com/knowledge/quickstart-client-libraries) in Python, Node.js, Go, or Java.
+  - Explore how to [use the gcloud CLI](https://developers.google.com/knowledge/quickstart-gcloud) .
   - Browse the [corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.
   - Review the [REST API reference](https://developers.google.com/knowledge/reference/rest) for complete method specifications.
   - Check [quota and limits](https://developers.google.com/knowledge/quota) for API rate limits and quotas.
