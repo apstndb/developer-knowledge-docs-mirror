@@ -43,7 +43,7 @@ Identifier. Contains the resource name of the document. Format: `documents/{uri_
 
 `string`
 
-Output only. Provides the URI of the content, such as `docs.cloud.google.com/storage/docs/creating-buckets` .
+Output only. Provides the URI of the content, such as `https://docs.cloud.google.com/storage/docs/creating-buckets` .
 
 `content`
 

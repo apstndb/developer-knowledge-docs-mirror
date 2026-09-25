@@ -71,9 +71,9 @@ Optional. Applies a strict filter to the search results used to ground the answe
 
 Supported fields for filtering:
 
-  - `contentLengthBytes` (INTEGER): The length of the `Document.content` field in bytes.
-  - `dataSource` (STRING): The source of the document, e.g. `docs.cloud.google.com` . See <https://developers.google.com/knowledge/reference/corpus-reference> for the complete list of data sources in the corpus.
-  - `updateTime` (TIMESTAMP): The timestamp of when the document was last meaningfully updated. A meaningful update is one that changes document's markdown content or metadata.
+  - `content_length_bytes` (INTEGER): The length of the `Document.content` field in bytes.
+  - `data_source` (STRING): The source of the document, e.g. `docs.cloud.google.com` . See <https://developers.google.com/knowledge/reference/corpus-reference> for the complete list of data sources in the corpus.
+  - `update_time` (TIMESTAMP): The timestamp of when the document was last meaningfully updated. A meaningful update is one that changes document's markdown content or metadata.
   - `uri` (STRING): The document URI, e.g. `https://docs.cloud.google.com/bigquery/docs/tables` .
 
 INTEGER fields support `=` , `<` , `<=` , `>` , and `>=` operators.
@@ -86,11 +86,11 @@ You can combine expressions using `AND` , `OR` , and `NOT` (or `-` ) logical ope
 
 Examples:
 
-  - Filter by `Document.content_length_bytes` : `contentLengthBytes < 50000`
-  - `dataSource = "docs.cloud.google.com" OR dataSource = "firebase.google.com"`
-  - `dataSource != "firebase.google.com"`
-  - `updateTime < "2024-01-01T00:00:00Z"`
-  - `updateTime >= "2025-01-22T00:00:00Z" AND (dataSource = "developer.chrome.com" OR dataSource = "web.dev")`
+  - Filter by `Document.content_length_bytes` : `content_length_bytes < 50000`
+  - `data_source = "docs.cloud.google.com" OR data_source = "firebase.google.com"`
+  - `data_source != "firebase.google.com"`
+  - `update_time < "2024-01-01T00:00:00Z"`
+  - `update_time >= "2025-01-22T00:00:00Z" AND (data_source = "developer.chrome.com" OR data_source = "web.dev")`
   - `uri = "https://docs.cloud.google.com/release-notes"`
 
 The `filter` string must not exceed 500 characters; values longer than 500 characters will result in an `INVALID_ARGUMENT` error.
@@ -260,20 +260,22 @@ Represents a reference to a source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field content can be only one of the following:&quot;documentReference&quot;: {object (DocumentReference)}// End of list of possible types for union field content.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;documentReference&quot;: {object (DocumentReference)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `content` . Contains the content of the reference. `content` can be only one of the following:
+Contains the content of the reference. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `documentReference`
 
 ` object ( DocumentReference  ` )
 
 Output only. The reference document.
+
+End of mutually exclusive fields.
 
 ## DocumentReference
 
