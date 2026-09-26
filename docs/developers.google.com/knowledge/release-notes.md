@@ -8,6 +8,10 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## September 25, 2026
+
+  - add\_circle The [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill is now available in the [`google/skills`](https://github.com/google/skills) repository, which helps AI coding assistants choose the right Developer Knowledge MCP server tool and fall back to the REST API when MCP is unavailable. For more information, see [Use the Developer Knowledge agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
+
 ## September 22, 2026
 
   - add\_circle [`gcloud developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge) commands are generally available (GA) in the [`gcloud` CLI](https://cloud.google.com/sdk) .

@@ -16,6 +16,13 @@ The Developer Knowledge API is designed to be the canonical source for machine-r
   - [`GetDocument`](https://developers.google.com/knowledge/reference/rest/v1/documents/get) or [`BatchGetDocuments`](https://developers.google.com/knowledge/reference/rest/v1/documents/batchGet) to fetch the full content of the search result(s).
   - [`AnswerQuery`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery) to generate answers to queries drawn from the documentation corpus.
 
+In addition to calling the REST API or client libraries directly, you can connect Developer Knowledge to your AI coding assistant using the following tools:
+
+  - **[Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)** : lets your AI coding assistant search and read Google's documentation using Model Context Protocol (MCP) tools ( `search_documents` , `get_documents` , and `answer_query` ).
+  - **[`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill)** : gives your AI assistant built-in instructions on when to use each Developer Knowledge MCP server tool, plus how to call the REST API with `curl` if MCP isn't available.
+
+> **Tip:** If you're setting up an AI coding assistant, you can install the [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill by running `npx skills add google/skills --skill retrieving-developer-knowledge` .
+
 To get started quickly, follow the [Quickstart guide](https://developers.google.com/knowledge/quickstart) .
 
 The corpus of searchable content is listed in [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) .

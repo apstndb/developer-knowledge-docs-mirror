@@ -77,6 +77,7 @@ This returns the full Markdown content of the specified document.
 
 ## What's next
 
-  - Explore the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to see the full list of included documentation.
-  - See the [API reference documentation](https://developers.google.com/knowledge/reference/rest) for more details on API methods and parameters.
-  - Learn how to [set up the MCP server in Google Antigravity](https://codelabs.developers.google.com/developer-knowledge-mcp-antigravity)
+  - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) and install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) to help your AI coding assistant search official Google documentation.
+  - Explore the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view the full list of included documentation.
+  - Refer to the [API reference documentation](https://developers.google.com/knowledge/reference/rest) for more details on API methods and parameters.
+  - Learn how to [set up the MCP server in Google Antigravity](https://codelabs.developers.google.com/developer-knowledge-mcp-antigravity) .

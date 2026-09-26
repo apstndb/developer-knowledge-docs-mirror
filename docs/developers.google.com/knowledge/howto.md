@@ -372,7 +372,8 @@ The Developer Knowledge API returns standard HTTP status codes. The following fu
 
 ## What's next
 
-  - See [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
+  - Refer to [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
+  - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) and install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) to help your AI coding assistant search and read official documentation.
   - Explore how to [use client libraries](https://developers.google.com/knowledge/quickstart-client-libraries) in Python, Node.js, Go, or Java.
   - Explore how to [use the gcloud CLI](https://developers.google.com/knowledge/quickstart-gcloud) .
   - Browse the [corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.

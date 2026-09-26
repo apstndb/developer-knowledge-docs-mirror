@@ -22,6 +22,8 @@ The `search_documents` tool searches Google's documentation to find the most rel
 
 Use the `answer_query` tool when you want a direct answer to a question drawn from the [Developer Knowledge corpus](https://developers.google.com/knowledge/reference/corpus-reference) rather than raw search results or full Markdown files.
 
+> **Tip:** Pair the Developer Knowledge MCP server with the [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill. This skill gives your AI coding assistant built-in instructions on which tool to pick, how to handle errors, and how to call the REST API if the MCP server isn't available. To learn more, check out [Use the Developer Knowledge agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
+
 ## Choose your authentication method
 
 The Developer Knowledge MCP server supports two authentication methods depending on your development environment and AI assistant:
@@ -307,21 +309,69 @@ Once configured, restart your AI assistant or reload its MCP servers. Then send 
 
 If the agent invokes `search_documents` or `answer_query` and returns information from Google documentation, your server is connected and active.
 
+## Use the Developer Knowledge agent skill
+
+Install the official [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill to teach your assistant when and how to use the [core tools](https://developers.google.com/knowledge/mcp#mcp-capabilities) offered by the Developer Knowledge MCP server.
+
+An agent skill is a set of instructions that your AI coding assistant reads before starting a task. The `retrieving-developer-knowledge` skill works with any assistant that supports the [open Agent Skills standard](https://agentskills.io/home) and helps your assistant do the following:
+
+  - **Pick the right tool** : guides your assistant to use `answer_query` for broad "how-to" questions and comparisons, and `search_documents` (with two to five focused keywords) when looking up exact CLI flags, IAM permissions, or code syntax.
+  - **Check for errors before answering** : tells your assistant to make sure a documentation search actually succeeded before writing an answer, so it doesn't mistake an API key or quota error for missing documentation or fall back to guessing from older training data.
+  - **Fall back to the REST API** : gives your assistant `curl` commands to call the Developer Knowledge API directly if your editor doesn't support MCP servers or the MCP connection fails.
+
+### Install the agent skill
+
+Select your coding assistant to install the `retrieving-developer-knowledge` skill in your project directory:
+
+### Google Antigravity
+
+    npx skills add google/skills --skill retrieving-developer-knowledge \
+      --agent=antigravity
+
+### Claude Code
+
+    npx skills add google/skills --skill retrieving-developer-knowledge \
+      --agent=claude-code
+
+### Cursor
+
+    npx skills add google/skills --skill retrieving-developer-knowledge \
+      --agent=cursor
+
+### Codex
+
+    npx skills add google/skills --skill retrieving-developer-knowledge \
+      --agent=codex
+
+### Other
+
+For other AI assistants supporting the open Agent Skills standard, run:
+
+    npx skills add google/skills --skill retrieving-developer-knowledge
+
+To update your installed skills to the latest version, run:
+
+    npx skills update
+
+To view the full skill instructions and reference guides, check out the [`retrieving-developer-knowledge` directory on GitHub](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) .
+
 ## Optimize context window and token usage
 
 Retrieving full documentation pages into an AI model's context window consumes significant tokens. Ingesting multiple large documents can cause high token costs, increased latency, and context window overflow.
 
 To ensure fast and cost-effective responses, follow these prompt engineering best practices:
 
-  - **Rely on two-step retrieval** : Let the agent start by calling `search_documents` . This returns focused snippets (chunks) that often contain the exact syntax or API signature you need without consuming tokens for the entire page. Instruct your agent to call `get_documents` only when surrounding context is strictly necessary.
+  - **Install the agent skill (recommended)** : install the [`retrieving-developer-knowledge`](https://developers.google.com/knowledge/mcp#agent-skill) agent skill so your assistant automatically picks the right search tool ( `answer_query` or `search_documents` ), uses short keyword searches, and only downloads full pages when needed.
 
-  - **Prefer `answer_query` for conceptual questions** : When you need a generated explanation or design comparison, direct your agent to use `answer_query` . This tool generates an answer directly from the Developer Knowledge corpus without returning full raw Markdown pages.
+  - **Rely on two-step retrieval** : let the agent start by calling `search_documents` . This returns focused snippets (chunks) that often contain the exact syntax or API signature you need without consuming tokens for the entire page. Instruct your agent to call `get_documents` only when surrounding context is strictly necessary.
 
-  - **Write specific, scoped prompts** : Avoid overly broad prompts such as "Explain all of Firebase". Instead, specify the target product, platform, and language:
+  - **Prefer `answer_query` for conceptual questions** : when you need a generated explanation or design comparison, direct your agent to use `answer_query` . This tool generates an answer directly from the Developer Knowledge corpus without returning full raw Markdown pages.
+
+  - **Write specific, scoped prompts** : avoid overly broad prompts such as "Explain all of Firebase". Instead, specify the target product, platform, and language:
     
         How do I write a Firestore transaction in Dart with error handling?
 
-  - **Add custom agent rules** : Add project-level guidelines to your assistant's instruction files (for example, `.cursorrules` , `CLAUDE.md` , or `.github/copilot-instructions.md` ) to restrict automatic full-page fetches:
+  - **Add custom agent rules** : if you aren't using the `retrieving-developer-knowledge` skill, add project-level guidelines to your assistant's instruction files (for example, `.cursorrules` , `CLAUDE.md` , or `.github/copilot-instructions.md` ) to restrict automatic full-page fetches:
     
         When searching Google developer documentation, inspect search_documents
         snippets first. Do not call get_documents unless the snippet lacks
@@ -398,17 +448,18 @@ If you encounter issues connecting to or querying the Developer Knowledge MCP se
 
 ### Troubleshooting matrix
 
-| Symptom or error                                                      | Likely cause                                                            | Resolution                                                                                                                                             |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `400 Bad Request: API key not valid`                                  | The API key string is missing, invalid, or malformed.                   | Verify that the API key was copied correctly and configured in the `headers` object with the `X-Goog-Api-Key` key.                                     |
-| `403 PERMISSION_DENIED` : `Developer Knowledge API has not been used` | The Developer Knowledge API is not enabled in the Google Cloud project. | Enable the API in the Google Cloud console or run `gcloud services enable developerknowledge.googleapis.com` .                                         |
-| `403 PERMISSION_DENIED: API target restriction`                       | The API key restriction list excludes the Developer Knowledge API.      | Update your API key restrictions on the Credentials page in the Google Cloud console to include Developer Knowledge API.                               |
-| `401 UNAUTHENTICATED` or missing ADC credentials                      | Application Default Credentials are expired or not initialized.         | Run `gcloud auth application-default login --project=PROJECT_ID` to refresh local credentials.                                                         |
-| `403 access_denied` / "Access blocked: authorization error"           | Your account is not listed as an authorized test user in OAuth consent. | In **Google Cloud console** \> **Auth Platform** \> **Audience** , add your email address under **Test users** .                                       |
-| OAuth client error or invalid redirect URI                            | The OAuth client was created with an unsupported application type.      | Re-create your OAuth client ID with the type set to **Desktop app** .                                                                                  |
-| `404 NOT_FOUND` on `/mcp` endpoint                                    | The API is not enabled for your project.                                | Enable the Developer Knowledge API in the Google Cloud console or run `gcloud services enable developerknowledge.googleapis.com` .                     |
-| `429 RESOURCE_EXHAUSTED`                                              | You have reached your project's quota limit.                            | Check your [Developer Knowledge API quota](https://developers.google.com/knowledge/quota) usage in the console and request a quota increase if needed. |
-| `403 PERMISSION_DENIED` with Model Armor                              | A false positive from the Model Armor PIJB filter blocked a safe query. | Set PIJB filter confidence to `HIGH_AND_ABOVE` in your Model Armor template settings.                                                                  |
+| Symptom or error                                                      | Likely cause                                                                             | Resolution                                                                                                                                                                                                                                                    |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400 Bad Request: API key not valid`                                  | The API key string is missing, invalid, or malformed.                                    | Verify that the API key was copied correctly and configured in the `headers` object with the `X-Goog-Api-Key` key.                                                                                                                                            |
+| `403 PERMISSION_DENIED` : `Developer Knowledge API has not been used` | The Developer Knowledge API is not enabled in the Google Cloud project.                  | Enable the API in the Google Cloud console or run `gcloud services enable developerknowledge.googleapis.com` .                                                                                                                                                |
+| `403 PERMISSION_DENIED: API target restriction`                       | The API key restriction list excludes the Developer Knowledge API.                       | Update your API key restrictions on the Credentials page in the Google Cloud console to include Developer Knowledge API.                                                                                                                                      |
+| `401 UNAUTHENTICATED` or missing ADC credentials                      | Application Default Credentials are expired or not initialized.                          | Run `gcloud auth application-default login --project=PROJECT_ID` to refresh local credentials.                                                                                                                                                                |
+| `403 access_denied` / "Access blocked: authorization error"           | Your account is not listed as an authorized test user in OAuth consent.                  | In **Google Cloud console** \> **Auth Platform** \> **Audience** , add your email address under **Test users** .                                                                                                                                              |
+| OAuth client error or invalid redirect URI                            | The OAuth client was created with an unsupported application type.                       | Re-create your OAuth client ID with the type set to **Desktop app** .                                                                                                                                                                                         |
+| `404 NOT_FOUND` on `/mcp` endpoint                                    | The API is not enabled for your project.                                                 | Enable the Developer Knowledge API in the Google Cloud console or run `gcloud services enable developerknowledge.googleapis.com` .                                                                                                                            |
+| `429 RESOURCE_EXHAUSTED`                                              | You have reached your project's quota limit.                                             | Check your [Developer Knowledge API quota](https://developers.google.com/knowledge/quota) usage in the console and request a quota increase if needed.                                                                                                        |
+| `403 PERMISSION_DENIED` with Model Armor                              | A false positive from the Model Armor PIJB filter blocked a safe query.                  | Set PIJB filter confidence to `HIGH_AND_ABOVE` in your Model Armor template settings.                                                                                                                                                                         |
+| MCP tools missing or connection fails                                 | Your coding tool doesn't support remote HTTP MCP servers or can't connect to the server. | Install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) , which tells your assistant how to fall back to the Developer Knowledge API REST endpoints using `curl` when MCP tools aren't available. |
 
 ### Resolve authentication and consent errors
 

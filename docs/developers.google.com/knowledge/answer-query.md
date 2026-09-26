@@ -95,3 +95,18 @@ The following example restricts the documentation sources to `docs.cloud.google.
         "query": "How do I create a BigQuery dataset?",
         "filter": "data_source = \"docs.cloud.google.com\""
       }'
+
+## Choose between `AnswerQuery` and `SearchDocumentChunks`
+
+When you're using the API or the Developer Knowledge MCP server, choose the method that best fits what you're looking for:
+
+  - **`AnswerQuery` (or the `answer_query` MCP tool)** : best for general "how-to" questions, comparing products, and step-by-step guides where you want a complete summary with links to the source docs.
+  - **`SearchDocumentChunks` (or the `search_documents` MCP tool)** : best for looking up exact CLI flags, code syntax, parameter names, or IAM permissions (such as `service.resource.verb` ). Use two to five specific keywords instead of a full question.
+
+> **Tip:** Install the [`retrieving-developer-knowledge`](https://developers.google.com/knowledge/mcp#agent-skill) agent skill in your AI coding assistant so it automatically picks the right tool for your question.
+
+## What's next
+
+  - [Search and retrieve documents](https://developers.google.com/knowledge/howto) to fetch matching text snippets or full Markdown pages.
+  - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) and install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
+  - Browse the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.
