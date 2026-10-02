@@ -56,6 +56,8 @@ The Developer Knowledge API and MCP server can search and get documents from pub
 
   - [go.dev](https://go.dev)
 
+  - [knowledge.workspace.google.com](https://knowledge.workspace.google.com)
+
   - [mapsplatform.google.com](https://mapsplatform.google.com)
 
   - [web.dev](https://web.dev)

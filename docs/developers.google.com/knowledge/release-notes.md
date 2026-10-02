@@ -8,6 +8,14 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## October 1, 2026
+
+  - add\_circle The following domain is now included in the corpus:
+    
+      - [knowledge.workspace.google.com](https://knowledge.workspace.google.com)
+    
+    See the full list of supported domains in the [Corpus Reference](https://developers.google.com/knowledge/reference/corpus-reference) .
+
 ## September 25, 2026
 
   - add\_circle The [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill is now available in the [`google/skills`](https://github.com/google/skills) repository, which helps AI coding assistants choose the right Developer Knowledge MCP server tool and fall back to the REST API when MCP is unavailable. For more information, see [Use the Developer Knowledge agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .

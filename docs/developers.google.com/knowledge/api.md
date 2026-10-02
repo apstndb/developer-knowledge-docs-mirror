@@ -16,18 +16,32 @@ The Developer Knowledge API is designed to be the canonical source for machine-r
   - [`GetDocument`](https://developers.google.com/knowledge/reference/rest/v1/documents/get) or [`BatchGetDocuments`](https://developers.google.com/knowledge/reference/rest/v1/documents/batchGet) to fetch the full content of the search result(s).
   - [`AnswerQuery`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery) to generate answers to queries drawn from the documentation corpus.
 
-In addition to calling the REST API or client libraries directly, you can connect Developer Knowledge to your AI coding assistant using the following tools:
+The Developer Knowledge API supports searching and retrieving documentation pages as unstructured Markdown content. The corpus of searchable content is listed in the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) .
 
-  - **[Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)** : lets your AI coding assistant search and read Google's documentation using Model Context Protocol (MCP) tools ( `search_documents` , `get_documents` , and `answer_query` ).
-  - **[`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill)** : gives your AI assistant built-in instructions on when to use each Developer Knowledge MCP server tool, plus how to call the REST API with `curl` if MCP isn't available.
+### Ways to use Developer Knowledge
 
-> **Tip:** If you're setting up an AI coding assistant, you can install the [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill by running `npx skills add google/skills --skill retrieving-developer-knowledge` .
+You can access Developer Knowledge through the following surfaces depending on your workflow:
 
-To get started quickly, follow the [Quickstart guide](https://developers.google.com/knowledge/quickstart) .
+  - **[REST API](https://developers.google.com/knowledge/quickstart) and [RPC API](https://developers.google.com/knowledge/reference/rpc)** : call the HTTP or gRPC endpoints directly. Refer to the [REST reference](https://developers.google.com/knowledge/reference/rest) and [RPC reference](https://developers.google.com/knowledge/reference/rpc) for method specifications.
+  - **[Client libraries](https://developers.google.com/knowledge/quickstart-client-libraries)** : integrate the Developer Knowledge API into your applications using official client libraries for Python, Node.js and TypeScript, Go, Java, PHP, and Ruby.
+  - **[Google Cloud CLI](https://developers.google.com/knowledge/quickstart-gcloud)** ( `gcloud` ): run [`gcloud developer-knowledge` commands](https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge) from your terminal to search document chunks, fetch Markdown content, and generate answers.
+  - **[Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)** : connect your AI coding assistant or agent to Google's documentation using Model Context Protocol (MCP) tools ( `search_documents` , `get_documents` , and `answer_query` ). Refer to the [MCP reference](https://developers.google.com/knowledge/reference/mcp) .
 
-The corpus of searchable content is listed in [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) .
+> **Tip:** If you're using an AI coding assistant, install the [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill by running `npx skills add google/skills --skill retrieving-developer-knowledge` . This skill gives your assistant built-in instructions on which Developer Knowledge MCP server tool to pick, how to handle errors, and how to call the REST API with `curl` if the MCP server isn't available. To learn more, check out [Use the Developer Knowledge agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
 
-The Developer Knowledge API supports searching and retrieving documentation pages as unstructured Markdown content.
+### Choose between the API and the MCP server
+
+The Developer Knowledge API and the Developer Knowledge MCP server are designed for different integration needs:
+
+  - **Use the Developer Knowledge API, client libraries, or gcloud CLI** when:
+      - Your project doesn't use an AI agent.
+      - You want to define custom tools or tool sets for your agent.
+      - You want to process or combine results before passing them to a model (for example, checking document byte length before fetching full content).
+      - You need to [filter search results](https://developers.google.com/knowledge/howto#filter-results) (such as by `data_source` or `update_time` ) or apply [field masks](https://developers.google.com/knowledge/howto#field-masks) .
+  - **Use the Developer Knowledge MCP server and agent skill** when:
+      - You want to connect an AI coding assistant or agent without writing custom tool definitions and descriptions.
+      - You want automatic updates as the Developer Knowledge MCP server adds new capabilities.
+      - You don't need custom metadata filtering on search results.
 
 ## Enable the API
 
@@ -43,8 +57,9 @@ To use the Developer Knowledge API, you first need to enable it for your Google 
 
 You can authenticate requests to the Developer Knowledge API using one of the following methods:
 
-  - **API key** : authenticate direct REST requests using the `key` query parameter or the `X-Goog-Api-Key` header. Refer to the [REST quickstart](https://developers.google.com/knowledge/quickstart) for an example.
+  - **API key** : authenticate direct [REST requests](https://developers.google.com/knowledge/quickstart) or the [Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) using the `key` query parameter or the `X-Goog-Api-Key` header.
   - **Application Default Credentials (ADC), OAuth 2.0, or service accounts** : authenticate requests when using the official [client libraries](https://developers.google.com/knowledge/quickstart-client-libraries) or production workflows. To learn more about setting up credentials, refer to the [Application Default Credentials documentation](https://cloud.google.com/docs/authentication/provide-credentials-adc) .
+  - **User credentials (gcloud CLI)** : authenticate CLI requests by signing in to your Google Cloud account with [`gcloud auth login`](https://docs.cloud.google.com/sdk/gcloud/reference/auth/login) . Refer to the [gcloud CLI quickstart](https://developers.google.com/knowledge/quickstart-gcloud) for setup instructions.
 
 ## Included documentation
 

@@ -34,7 +34,7 @@ To install the official Developer Knowledge API client library, select your prog
 
 ### Python
 
-    pip install google-developer-knowledge
+    pip install --upgrade google-developer-knowledge
 
 ### Node.js and TypeScript
 
@@ -46,12 +46,17 @@ To install the official Developer Knowledge API client library, select your prog
 
 ### Java
 
-    <!-- Maven dependency -->
+If you use Maven, add the following dependency to your `pom.xml` file:
+
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-developer-knowledge</artifactId>
-      <version>0.3.0</version>
+      <version>0.6.0</version>
     </dependency>
+
+If you use Gradle, add the following dependency to your `build.gradle` file:
+
+    implementation 'com.google.cloud:google-cloud-developer-knowledge:0.6.0'
 
 ## Generate answers from documentation
 
