@@ -20,9 +20,11 @@ Set up your environment for your preferred tool:
 
 [Enable the API and generate a Developer Knowledge API key](https://developers.google.com/knowledge/quickstart#before-you-begin) . Then, save your key to an environment variable:
 
-    export DEVELOPERKNOWLEDGE_API_KEY="YOUR_API_KEY"
+```
+export DEVELOPERKNOWLEDGE_API_KEY="YOUR_API_KEY"
+```
 
-Replace `  YOUR_API_KEY  ` with your Developer Knowledge API key.
+Replace `YOUR_API_KEY` with your Developer Knowledge API key.
 
 ## Answer a query
 
@@ -32,48 +34,54 @@ The following example sends a query asking how to create a BigQuery dataset:
 
 ### gcloud
 
-    gcloud developer-knowledge answer-query \
-      --query="How do I create a BigQuery dataset?"
+```
+gcloud developer-knowledge answer-query \
+  --query="How do I create a BigQuery dataset?"
+```
 
 ### REST
 
-    curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery?key=$DEVELOPERKNOWLEDGE_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"query": "How do I create a BigQuery dataset?"}'
+```
+curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery?key=$DEVELOPERKNOWLEDGE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "How do I create a BigQuery dataset?"}'
+```
 
 The response contains the text answer in the `answer.answerText` field, along with `citations` and `references` in the [`answer`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery#answer) object:
 
-    {
-      "answer": {
-        "answerText": "To create a BigQuery dataset, you can use the Google Cloud Console, the bq command-line tool, or the BigQuery client libraries.",
-        "citations": [
+```
+{
+  "answer": {
+    "answerText": "To create a BigQuery dataset, you can use the Google Cloud Console, the bq command-line tool, or the BigQuery client libraries.",
+    "citations": [
+      {
+        "startIndex": 0,
+        "endIndex": 123,
+        "sources": [
           {
-            "startIndex": 0,
-            "endIndex": 123,
-            "sources": [
-              {
-                "referenceIndex": 0
-              }
-            ]
-          }
-        ],
-        "references": [
-          {
-            "documentReference": {
-              "documentChunk": {
-                "parent": "documents/docs.cloud.google.com/bigquery/docs/datasets",
-                "content": "This page explains how to create BigQuery datasets...",
-                "document": {
-                  "name": "documents/docs.cloud.google.com/bigquery/docs/datasets",
-                  "title": "Introduction to datasets",
-                  "uri": "https://docs.cloud.google.com/bigquery/docs/datasets"
-                }
-              }
-            }
+            "referenceIndex": 0
           }
         ]
       }
-    }
+    ],
+    "references": [
+      {
+        "documentReference": {
+          "documentChunk": {
+            "parent": "documents/docs.cloud.google.com/bigquery/docs/datasets",
+            "content": "This page explains how to create BigQuery datasets...",
+            "document": {
+              "name": "documents/docs.cloud.google.com/bigquery/docs/datasets",
+              "title": "Introduction to datasets",
+              "uri": "https://docs.cloud.google.com/bigquery/docs/datasets"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 ## Filter documentation sources
 
@@ -83,30 +91,34 @@ The following example restricts the documentation sources to `docs.cloud.google.
 
 ### gcloud
 
-    gcloud developer-knowledge answer-query \
-      --query="How do I create a BigQuery dataset?" \
-      --query-filter='data_source = "docs.cloud.google.com"'
+```
+gcloud developer-knowledge answer-query \
+  --query="How do I create a BigQuery dataset?" \
+  --query-filter='data_source = "docs.cloud.google.com"'
+```
 
 ### REST
 
-    curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery?key=$DEVELOPERKNOWLEDGE_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "query": "How do I create a BigQuery dataset?",
-        "filter": "data_source = \"docs.cloud.google.com\""
-      }'
+```
+curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery?key=$DEVELOPERKNOWLEDGE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "How do I create a BigQuery dataset?",
+    "filter": "data_source = \"docs.cloud.google.com\""
+  }'
+```
 
 ## Choose between `AnswerQuery` and `SearchDocumentChunks`
 
 When you're using the API or the Developer Knowledge MCP server, choose the method that best fits what you're looking for:
 
-  - **`AnswerQuery` (or the `answer_query` MCP tool)** : best for general "how-to" questions, comparing products, and step-by-step guides where you want a complete summary with links to the source docs.
-  - **`SearchDocumentChunks` (or the `search_documents` MCP tool)** : best for looking up exact CLI flags, code syntax, parameter names, or IAM permissions (such as `service.resource.verb` ). Use two to five specific keywords instead of a full question.
+- **`AnswerQuery` (or the `answer_query` MCP tool)** : best for general "how-to" questions, comparing products, and step-by-step guides where you want a complete summary with links to the source docs.
+- **`SearchDocumentChunks` (or the `search_documents` MCP tool)** : best for looking up exact CLI flags, code syntax, parameter names, or IAM permissions (such as `service.resource.verb` ). Use two to five specific keywords instead of a full question.
 
 > **Tip:** Install the [`retrieving-developer-knowledge`](https://developers.google.com/knowledge/mcp#agent-skill) agent skill in your AI coding assistant so it automatically picks the right tool for your question.
 
 ## What's next
 
-  - [Search and retrieve documents](https://developers.google.com/knowledge/howto) to fetch matching text snippets or full Markdown pages.
-  - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) and install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
-  - Browse the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.
+- [Search and retrieve documents](https://developers.google.com/knowledge/howto) to fetch matching text snippets or full Markdown pages.
+- [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) and install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
+- Browse the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.

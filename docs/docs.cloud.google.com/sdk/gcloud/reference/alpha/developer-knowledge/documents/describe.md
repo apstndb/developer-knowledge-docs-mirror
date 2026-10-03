@@ -12,7 +12,7 @@ gcloud alpha developer-knowledge documents describe - retrieve a single document
 
 SYNOPSIS
 
-`gcloud alpha developer-knowledge documents describe` `  NAME  ` \[ `  --view  ` = `  VIEW  ` ; default="content"\] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha developer-knowledge documents describe` [`NAME`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe#NAME) \[ [`--view`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe#--view) = `VIEW` ; default="content"\] \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -22,37 +22,46 @@ EXAMPLES
 
 To retrieve the full Markdown content along with the metadata of a document, run:
 
-    gcloud alpha developer-knowledge documents describe documents/docs.cloud.google.com/storage/docs/creating-buckets
+```
+gcloud alpha developer-knowledge documents describe documents/docs.cloud.google.com/storage/docs/creating-buckets
+```
 
 To retrieve only the basic metadata (like title and data source) of a specific document, run:
 
-    gcloud alpha developer-knowledge documents describe documents/docs.cloud.google.com/storage/docs/creating-buckets --view=basic
+```
+gcloud alpha developer-knowledge documents describe documents/docs.cloud.google.com/storage/docs/creating-buckets --view=basic
+```
 
 To retrieve the complete document record, including all available backend fields, metadata, and full Markdown content, run:
 
-    gcloud alpha developer-knowledge documents describe documents/docs.cloud.google.com/storage/docs/creating-buckets --view=full
+```
+gcloud alpha developer-knowledge documents describe documents/docs.cloud.google.com/storage/docs/creating-buckets --view=full
+```
 
 POSITIONAL ARGUMENTS
 
-  - `  NAME  `  
-    The resource name of the document to retrieve. Format: `documents/{uri_without_scheme}` (e.g., `documents/docs.cloud.google.com/storage/docs/creating-buckets` ).
+`NAME`  
+The resource name of the document to retrieve. Format: `documents/{uri_without_scheme}` (e.g., `documents/docs.cloud.google.com/storage/docs/creating-buckets` ).
 
 FLAGS
 
-  - `--view` = `  VIEW  ` ; default="content"  
-    Specify which fields of the document are included in the response. `  VIEW  ` must be one of:
-      - `basic`  
-        Include basic metadata fields (e.g., URI, data source, title).
-      - `content`  
-        Include basic fields and the Markdown content.
-      - `full`  
-        Include all document fields.
+`--view` = `VIEW` ; default="content"  
+Specify which fields of the document are included in the response. `VIEW` must be one of:
+
+`basic`  
+Include basic metadata fields (e.g., URI, data source, title).
+
+`content`  
+Include basic fields and the Markdown content.
+
+`full`  
+Include all document fields.
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 API REFERENCE
 
@@ -62,6 +71,10 @@ NOTES
 
 This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. These variants are also available:
 
-    gcloud developer-knowledge documents describe
+```
+gcloud developer-knowledge documents describe
+```
 
-    gcloud beta developer-knowledge documents describe
+```
+gcloud beta developer-knowledge documents describe
+```

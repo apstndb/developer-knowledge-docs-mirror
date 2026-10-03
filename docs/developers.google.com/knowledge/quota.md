@@ -11,7 +11,7 @@ To view your quota and API usage information, go to the [**Quotas & System Limit
 The following table lists the default quotas for Developer Knowledge API methods:
 
 | API method                          | Default quota                         |
-| ----------------------------------- | ------------------------------------- |
+|-------------------------------------|---------------------------------------|
 | `AnswerQuery`                       | 50 per day per project                |
 | `GetDocument` , `BatchGetDocuments` | 100 per minute per project (combined) |
 | `SearchDocumentChunks`              | 100 per minute per project            |

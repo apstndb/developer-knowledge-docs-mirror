@@ -10,10 +10,10 @@ When you are querying the Developer Knowledge API or Developer Knowledge MCP ser
 
 In this guide, you will learn how to:
 
-  - Implement truncated exponential backoff with jitter for HTTP 429 responses.
-  - Handle canonical gRPC error codes ( `INVALID_ARGUMENT` , `PERMISSION_DENIED` , `RESOURCE_EXHAUSTED` ).
-  - Manage MCP connection timeouts and retry logic.
-  - Apply quota management and caching best practices.
+- Implement truncated exponential backoff with jitter for HTTP 429 responses.
+- Handle canonical gRPC error codes ( `INVALID_ARGUMENT` , `PERMISSION_DENIED` , `RESOURCE_EXHAUSTED` ).
+- Manage MCP connection timeouts and retry logic.
+- Apply quota management and caching best practices.
 
 ## HTTP 429 rate limiting and exponential backoff
 
@@ -27,10 +27,10 @@ Calculate retry delays using the following formula:
 
 Use the following parameters to calculate retry delays:
 
-  - `initial_delay` : initial retry delay (for example, 1.0 second).
-  - `max_delay` : maximum backoff cap (for example, 32.0 seconds).
-  - `attempt` : current retry count (0, 1, 2, ...).
-  - `jitter` : random value between 0 and 1.0 second to prevent thread synchronization spikes (thundering herd problem).
+- `initial_delay` : initial retry delay (for example, 1.0 second).
+- `max_delay` : maximum backoff cap (for example, 32.0 seconds).
+- `attempt` : current retry count (0, 1, 2, ...).
+- `jitter` : random value between 0 and 1.0 second to prevent thread synchronization spikes (thundering herd problem).
 
 ## gRPC error handling
 
@@ -41,7 +41,7 @@ Applications accessing the service over gRPC must inspect canonical `grpc.Status
 The following table lists canonical gRPC status codes returned by the service and recommended client handling:
 
 | gRPC status code     | HTTP status               | Root cause                                                                                                                    | Recommended action                                                  |
-| :------------------- | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
+|----------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 | `INVALID_ARGUMENT`   | `400 Bad Request`         | Malformed query string, invalid parameter format, or invalid field mask.                                                      | **Do not retry** . Correct request parameters before repeating.     |
 | `UNAUTHENTICATED`    | `401 Unauthorized`        | Missing, expired, or malformed API key or OAuth Bearer token.                                                                 | **Do not retry** . Refresh credentials or generate a valid API key. |
 | `PERMISSION_DENIED`  | `403 Forbidden`           | API key lacks permission or Developer Knowledge API is disabled in project.                                                   | **Do not retry** . Verify API enablement in Google Cloud console.   |
@@ -60,9 +60,9 @@ When an agent invokes `search_documents` , `get_documents` , or `answer_query` ,
 
 To handle tool execution timeouts:
 
-  - **Configure client timeouts** : set tool execution timeouts to 30–60 seconds in your MCP host client configuration.
-  - **Handle network interruptions** : retry failed HTTP requests with exponential backoff when experiencing transient network drops or HTTP 503 responses.
-  - **Inspect error messages** : parse standard JSON-RPC error messages or HTTP error status codes to distinguish invalid arguments from quota exhaustion.
+- **Configure client timeouts** : set tool execution timeouts to 30–60 seconds in your MCP host client configuration.
+- **Handle network interruptions** : retry failed HTTP requests with exponential backoff when experiencing transient network drops or HTTP 503 responses.
+- **Inspect error messages** : parse standard JSON-RPC error messages or HTTP error status codes to distinguish invalid arguments from quota exhaustion.
 
 ## Quota management best practices
 
@@ -75,7 +75,7 @@ Follow these best practices to maintain optimal API usage and avoid unexpected r
 
 ## Related content
 
-  - [Developer Knowledge quota and limits](https://developers.google.com/knowledge/quota)
-  - [Developer Knowledge API quickstart](https://developers.google.com/knowledge/quickstart)
-  - [Search and retrieve documents](https://developers.google.com/knowledge/howto)
-  - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)
+- [Developer Knowledge quota and limits](https://developers.google.com/knowledge/quota)
+- [Developer Knowledge API quickstart](https://developers.google.com/knowledge/quickstart)
+- [Search and retrieve documents](https://developers.google.com/knowledge/howto)
+- [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)

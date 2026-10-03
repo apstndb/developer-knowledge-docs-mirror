@@ -12,7 +12,7 @@ gcloud alpha developer-knowledge documents - explore and search Developer Knowle
 
 SYNOPSIS
 
-`gcloud alpha developer-knowledge documents` `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha developer-knowledge documents` [`COMMAND`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents#COMMAND) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,23 +20,28 @@ DESCRIPTION
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 COMMANDS
 
-`  COMMAND  ` is one of the following:
+`COMMAND` is one of the following:
 
-  - `  describe  `  
-    `(ALPHA)` Retrieve a single document with its full Markdown content.
-  - `  search-chunks  `  
-    `(ALPHA)` Search for developer knowledge across Google's developer documentation.
+[`describe`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe)  
+`(ALPHA)` Retrieve a single document with its full Markdown content.
+
+[`search-chunks`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks)  
+`(ALPHA)` Search for developer knowledge across Google's developer documentation.
 
 NOTES
 
 This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. These variants are also available:
 
-    gcloud developer-knowledge documents
+```
+gcloud developer-knowledge documents
+```
 
-    gcloud beta developer-knowledge documents
+```
+gcloud beta developer-knowledge documents
+```
