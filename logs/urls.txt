@@ -4,6 +4,7 @@ https://developers.google.com/knowledge/client-libraries	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/error-handling-and-limits	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/howto	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/mcp	2026-10-02T22:38:48Z
+https://developers.google.com/knowledge/mcp-agent-integration	2026-10-08T23:44:36Z
 https://developers.google.com/knowledge/quickstart	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/quickstart-client-libraries	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/quickstart-gcloud	2026-10-01T17:39:33Z
@@ -29,7 +30,7 @@ https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchD
 https://developers.google.com/knowledge/reference/rpc	2026-07-17T07:13:12Z
 https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1	2026-08-27T17:07:27Z
 https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1alpha	2026-08-19T19:02:22Z
-https://developers.google.com/knowledge/release-notes	2026-10-01T18:01:34Z
+https://developers.google.com/knowledge/release-notes	2026-10-08T21:09:33Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge	2026-09-22T17:18:31Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query	2026-09-22T17:17:42Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents	2026-09-22T17:18:01Z

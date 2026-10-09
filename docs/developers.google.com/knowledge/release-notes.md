@@ -8,6 +8,10 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## October 8, 2026
+
+- add_circle [Client libraries](https://developers.google.com/knowledge/client-libraries) for the Developer Knowledge API are available for C#, Go, Java, Node.js, PHP, Python, and Ruby languages.
+
 ## October 1, 2026
 
 - add_circle The following domain is now included in the corpus:
