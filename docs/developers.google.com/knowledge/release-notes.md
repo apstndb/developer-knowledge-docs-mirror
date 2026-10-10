@@ -8,8 +8,14 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## October 9, 2026
+
+- add_circle `AnswerQuery` uses the [`gemini-3.5-flash`](https://developers.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
+- check_circle `AnswerQuery` service has been restored, answers are no longer being truncated.
+
 ## October 8, 2026
 
+- bug_report `AnswerQuery` is experiencing degraded service with truncated responses. We are actively working on a fix.
 - add_circle [Client libraries](https://developers.google.com/knowledge/client-libraries) for the Developer Knowledge API are available for C#, Go, Java, Node.js, PHP, Python, and Ruby languages.
 
 ## October 1, 2026
