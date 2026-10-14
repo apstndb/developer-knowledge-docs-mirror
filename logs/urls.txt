@@ -4,7 +4,6 @@ https://developers.google.com/knowledge/client-libraries	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/error-handling-and-limits	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/howto	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/mcp	2026-10-02T22:38:48Z
-https://developers.google.com/knowledge/mcp-agent-integration	2026-10-08T23:44:36Z
 https://developers.google.com/knowledge/quickstart	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/quickstart-client-libraries	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/quickstart-gcloud	2026-10-01T17:39:33Z
