@@ -8,6 +8,8 @@ data_source: developers.google.com
 
 The Google Developer Knowledge MCP server gives AI-powered development tools direct access to search and retrieve official Google developer documentation for products like Firebase, Google Cloud, Android, Google Maps Platform, and more. By connecting your coding assistant to Google's authoritative library of documentation, you avoid manual web searches, outdated context, and scraping.
 
+To connect to the Developer Knowledge MCP server from your own application or agent code instead of an IDE, refer to [Connect using MCP SDKs](https://developers.google.com/knowledge/mcp-sdk) .
+
 ## MCP server capabilities
 
 The Google Developer Knowledge MCP server provides three core tools to your AI coding assistant:

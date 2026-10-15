@@ -1,6 +1,6 @@
 ---
-name: documents/developers.google.com/knowledge/howto
-uri: https://developers.google.com/knowledge/howto
+name: documents/developers.google.com/knowledge/search-retrieve
+uri: https://developers.google.com/knowledge/search-retrieve
 title: Search and retrieve documents
 description: The Developer Knowledge API and MCP server provide access to Google's developer knowledge.
 data_source: developers.google.com

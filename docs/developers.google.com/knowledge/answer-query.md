@@ -85,7 +85,7 @@ The response contains the text answer in the `answer.answerText` field, along wi
 
 ## Filter documentation sources
 
-To restrict the documentation sources used to generate the answer, pass a filter expression using the `--query-filter` flag in the gcloud CLI or the `filter` field in your REST request body. For details on supported filter fields and operators, see [Filter search results](https://developers.google.com/knowledge/howto#filter-results) .
+To restrict the documentation sources used to generate the answer, pass a filter expression using the `--query-filter` flag in the gcloud CLI or the `filter` field in your REST request body. For details on supported filter fields and operators, see [Filter search results](https://developers.google.com/knowledge/search-retrieve#filter-results) .
 
 The following example restricts the documentation sources to `docs.cloud.google.com` :
 
@@ -119,6 +119,6 @@ When you're using the API or the Developer Knowledge MCP server, choose the meth
 
 ## What's next
 
-- [Search and retrieve documents](https://developers.google.com/knowledge/howto) to fetch matching text snippets or full Markdown pages.
+- [Search and retrieve documents](https://developers.google.com/knowledge/search-retrieve) to fetch matching text snippets or full Markdown pages.
 - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp) and install the [`retrieving-developer-knowledge` agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
 - Browse the [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation sources.

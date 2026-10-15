@@ -133,7 +133,7 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## April 9, 2026
 
-- add_circle `SearchDocumentChunks` now supports filtering on the Document `data_source` , `update_time` , and `uri` fields. See [Search and retrieve documents](https://developers.google.com/knowledge/howto) and the reference for [`SearchDocumentChunks.filter`](https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchDocumentChunks#body.QUERY_PARAMETERS.filter) for more information.
+- add_circle `SearchDocumentChunks` now supports filtering on the Document `data_source` , `update_time` , and `uri` fields. See [Search and retrieve documents](https://developers.google.com/knowledge/search-retrieve) and the reference for [`SearchDocumentChunks.filter`](https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchDocumentChunks#body.QUERY_PARAMETERS.filter) for more information.
 
 ## April 2, 2026
 

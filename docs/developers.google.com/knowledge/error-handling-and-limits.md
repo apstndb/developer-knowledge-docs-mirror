@@ -77,5 +77,5 @@ Follow these best practices to maintain optimal API usage and avoid unexpected r
 
 - [Developer Knowledge quota and limits](https://developers.google.com/knowledge/quota)
 - [Developer Knowledge API quickstart](https://developers.google.com/knowledge/quickstart)
-- [Search and retrieve documents](https://developers.google.com/knowledge/howto)
+- [Search and retrieve documents](https://developers.google.com/knowledge/search-retrieve)
 - [Connect to the Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)

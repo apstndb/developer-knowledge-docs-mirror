@@ -201,7 +201,7 @@ Run the [`gcloud developer-knowledge documents describe` command](https://docs.c
 ## What's next
 
 - Learn how to [generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
-- Learn how to [filter search results, paginate, and specify document views](https://developers.google.com/knowledge/howto) .
+- Learn how to [filter search results, paginate, and specify document views](https://developers.google.com/knowledge/search-retrieve) .
 - Explore the [corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view the full list of included documentation.
 - Refer to the [`gcloud developer-knowledge` reference](https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge) for details on all available commands and flags.
 - Review the [REST API reference](https://developers.google.com/knowledge/reference/rest) for complete specifications for API methods.

@@ -16,6 +16,16 @@ To learn more about client libraries for Google APIs, refer to [Client libraries
 
 Select your programming language to install the official Developer Knowledge API client library:
 
+### C#
+
+Add the NuGet package to your .NET project:
+
+```
+dotnet add package Google.Developers.DeveloperKnowledge.V1
+```
+
+To learn more, refer to [Setting up a C# development environment](https://cloud.google.com/dotnet/docs/setup) .
+
 ### Go
 
 Add the module to your Go project:
@@ -115,6 +125,17 @@ For a local development environment, you can set up ADC with the credentials ass
 
 Select a language tab to find links to API reference documentation, code samples, best practices, issue trackers, and source code repositories for each client library:
 
+### C#
+
+The following list contains links to more resources related to the client library for C#:
+
+- [API reference](https://developers.google.com/dotnet/docs/reference/Google.Developers.DeveloperKnowledge.V1/latest)
+- [Package on NuGet](https://www.nuget.org/packages/Google.Developers.DeveloperKnowledge.V1)
+- [Code samples on GitHub](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Developers.DeveloperKnowledge.V1/Google.Developers.DeveloperKnowledge.V1.GeneratedSnippets)
+- [Client libraries best practices](https://cloud.google.com/apis/docs/client-libraries-best-practices)
+- [Issue tracker](https://github.com/googleapis/google-cloud-dotnet/issues)
+- [Source code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Developers.DeveloperKnowledge.V1)
+
 ### Go
 
 The following list contains links to more resources related to the client library for Go:
@@ -141,6 +162,7 @@ The following list contains links to more resources related to the client librar
 
 The following list contains links to more resources related to the client library for Node.js and TypeScript:
 
+- [API reference](https://developers.google.com/nodejs/docs/reference/developer-knowledge/latest)
 - [Package on npm](https://www.npmjs.com/package/@google/developer-knowledge)
 - [Code samples on GitHub](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/main/developer-knowledge)
 - [Client libraries best practices](https://cloud.google.com/apis/docs/client-libraries-best-practices)
@@ -183,7 +205,7 @@ The following list contains links to more resources related to the client librar
 ## What's next
 
 - Follow the [client libraries quickstart](https://developers.google.com/knowledge/quickstart-client-libraries) to view and run code samples for `AnswerQuery` , `SearchDocumentChunks` , `GetDocument` , and `BatchGetDocuments` .
-- Learn more about query filters, pagination, and field masks in [Search and retrieve documents](https://developers.google.com/knowledge/howto) .
+- Learn more about query filters, pagination, and field masks in [Search and retrieve documents](https://developers.google.com/knowledge/search-retrieve) .
 - Use grounded generation with [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 - Review retry strategies and status codes in [Error handling, rate limiting, and quota management](https://developers.google.com/knowledge/error-handling-and-limits) .
 - Browse the [corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) to view all supported documentation domains.

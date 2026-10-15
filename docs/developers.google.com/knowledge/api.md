@@ -23,7 +23,7 @@ The Developer Knowledge API supports searching and retrieving documentation page
 You can access Developer Knowledge through the following surfaces depending on your workflow:
 
 - **[REST API](https://developers.google.com/knowledge/quickstart) and [RPC API](https://developers.google.com/knowledge/reference/rpc)** : call the HTTP or gRPC endpoints directly. Refer to the [REST reference](https://developers.google.com/knowledge/reference/rest) and [RPC reference](https://developers.google.com/knowledge/reference/rpc) for method specifications.
-- **[Client libraries](https://developers.google.com/knowledge/quickstart-client-libraries)** : integrate the Developer Knowledge API into your applications using official client libraries for Python, Node.js and TypeScript, Go, Java, PHP, and Ruby.
+- **[Client libraries](https://developers.google.com/knowledge/quickstart-client-libraries)** : integrate the Developer Knowledge API into your applications using official client libraries for C#, Go, Java, Node.js and TypeScript, PHP, Python, and Ruby.
 - **[Google Cloud CLI](https://developers.google.com/knowledge/quickstart-gcloud)** ( `gcloud` ): run [`gcloud developer-knowledge` commands](https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge) from your terminal to search document chunks, fetch Markdown content, and generate answers.
 - **[Developer Knowledge MCP server](https://developers.google.com/knowledge/mcp)** : connect your AI coding assistant or agent to Google's documentation using Model Context Protocol (MCP) tools ( `search_documents` , `get_documents` , and `answer_query` ). Refer to the [MCP reference](https://developers.google.com/knowledge/reference/mcp) .
 
@@ -37,7 +37,7 @@ The Developer Knowledge API and the Developer Knowledge MCP server are designed 
   - Your project doesn't use an AI agent.
   - You want to define custom tools or tool sets for your agent.
   - You want to process or combine results before passing them to a model (for example, checking document byte length before fetching full content).
-  - You need to [filter search results](https://developers.google.com/knowledge/howto#filter-results) (such as by `data_source` or `update_time` ) or apply [field masks](https://developers.google.com/knowledge/howto#field-masks) .
+  - You need to [filter search results](https://developers.google.com/knowledge/search-retrieve#filter-results) (such as by `data_source` or `update_time` ) or apply [field masks](https://developers.google.com/knowledge/search-retrieve#field-masks) .
 - **Use the Developer Knowledge MCP server and agent skill** when:
   - You want to connect an AI coding assistant or agent without writing custom tool definitions and descriptions.
   - You want automatic updates as the Developer Knowledge MCP server adds new capabilities.
