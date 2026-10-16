@@ -35,6 +35,8 @@ Before you start using the Developer Knowledge API, make sure you complete the f
 
 5.  Click **Create** .
 
+> **Note:** In addition to API keys, the Developer Knowledge API supports programmatic authentication using service accounts and OAuth 2.0 access tokens. For details, refer to [Authentication](https://developers.google.com/knowledge/api#authentication) .
+
 ## Generate answers from documentation
 
 Once you have your Developer Knowledge API key, you can start using the API. The following example shows how to ask a query and generate an answer drawn from the documentation:

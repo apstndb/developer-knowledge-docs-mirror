@@ -61,6 +61,31 @@ You can authenticate requests to the Developer Knowledge API using one of the fo
 - **Application Default Credentials (ADC), OAuth 2.0, or service accounts** : authenticate requests when using the official [client libraries](https://developers.google.com/knowledge/quickstart-client-libraries) or production workflows. To learn more about setting up credentials, refer to the [Application Default Credentials documentation](https://cloud.google.com/docs/authentication/provide-credentials-adc) .
 - **User credentials (gcloud CLI)** : authenticate CLI requests by signing in to your Google Cloud account with [`gcloud auth login`](https://docs.cloud.google.com/sdk/gcloud/reference/auth/login) . Refer to the [gcloud CLI quickstart](https://developers.google.com/knowledge/quickstart-gcloud) for setup instructions.
 
+### OAuth scopes
+
+When authenticating with OAuth 2.0 or service accounts, the Developer Knowledge API and Developer Knowledge MCP server accept the following OAuth scopes:
+
+- `https://www.googleapis.com/auth/cloud-platform` : default scope used by Application Default Credentials (ADC), the gcloud CLI, and official Google Cloud client libraries.
+- `https://www.googleapis.com/auth/devprofiles.full_control` : scope used for user OAuth 2.0 consent flows and MCP server integrations.
+- `https://www.googleapis.com/auth/developerprofiles.readonly` : read-only scope supported for service accounts and credentials that don't require an end-user OAuth consent screen.
+
+### Bearer token authorization
+
+To authenticate direct REST requests with a service account or OAuth 2.0 access token, pass the token in the `Authorization: Bearer` header and specify your billing project in `X-Goog-User-Project` :
+
+```
+export ACCESS_TOKEN=$(gcloud auth print-access-token)
+curl -X POST "https://developerknowledge.googleapis.com/v1:answerQuery" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "X-Goog-User-Project: PROJECT_ID" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "How do I create a BigQuery dataset?"}'
+```
+
+Replace `PROJECT_ID` with your Google Cloud project ID.
+
+For Python, Node.js, Go, and Java applications, the official client libraries handle Application Default Credentials (ADC) and token refreshes automatically. For examples, refer to [Use client libraries with the Developer Knowledge API](https://developers.google.com/knowledge/quickstart-client-libraries) .
+
 ## Included documentation
 
 Refer to [Corpus reference](https://developers.google.com/knowledge/reference/corpus-reference) for information about which documents are searched by the API.

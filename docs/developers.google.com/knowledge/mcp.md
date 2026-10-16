@@ -152,6 +152,14 @@ Create an OAuth 2.0 client ID and secret if your AI assistant uses an interactiv
     - Select **Web application** and add your client's redirect URI for clients that require static OAuth redirect callbacks (such as Cursor or Claude Code custom connectors). Use the exact redirect URI that your client documents; custom redirect URIs aren't supported. For client-specific redirect URIs, refer to [Configure MCP in an AI application](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) .
 5.  Click **Create** , then copy your **Client ID** and **Client secret** (or download the JSON client credentials file).
 
+#### OAuth scopes
+
+The Developer Knowledge MCP server accepts the following OAuth scopes:
+
+- `https://www.googleapis.com/auth/cloud-platform` : default scope used by Application Default Credentials (ADC) and the gcloud CLI.
+- `https://www.googleapis.com/auth/devprofiles.full_control` : scope used for OAuth 2.0 client ID consent flows and MCP server discovery.
+- `https://www.googleapis.com/auth/developerprofiles.readonly` : read-only scope supported for service accounts and credentials that don't require an end-user OAuth consent screen.
+
 ## Configure your IDE or coding agent
 
 After obtaining your credentials, follow the setup instructions for your coding environment. The instructions for each coding environment support the following authentication methods:

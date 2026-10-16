@@ -436,7 +436,7 @@ The Developer Knowledge API returns standard HTTP status codes. The following fu
   - The `filter` expression string exceeds 500 characters.
   - The `update_time` timestamp is invalid (must use RFC 3339 format).
   - More than 20 document names were provided in a `BatchGetDocuments` request.
-- **`401 UNAUTHENTICATED`** : the request is missing an API key or uses an invalid key. See [Authentication](https://developers.google.com/knowledge/api#authentication) .
+- **`401 UNAUTHENTICATED`** : the request is missing an API key or Bearer token, or uses invalid credentials. Refer to [Authentication](https://developers.google.com/knowledge/api#authentication) .
 - **`404 NOT_FOUND`** : the requested document name does not exist or belongs to a domain that isn't included in the corpus.
 - **`429 RESOURCE_EXHAUSTED`** : the project has exceeded its quota. See [Quota and limits](https://developers.google.com/knowledge/quota) .
 
