@@ -8,7 +8,7 @@ data_source: developers.google.com
 
 ## Tool: `answer_query`
 
-Use answer_query to get a grounded answer to a query about Google developer products. This tool has limited quota. This tool will synthesize information from the corpus to generate an answer to the query. answer_query grounds answers using the same corpus as search_documents. This tool returns the generated answer_text and a list of document names (references) used to generate the answer. Use get_documents with the document names to fetch the entire document content if needed.
+Use answer_query to get a grounded, synthesized conceptual answer to a high-level question about Google developer products. For exact code samples, CLI flags, specific error messages, or full document walkthroughs, prefer `search_documents` followed by `get_documents` instead. This tool has limited quota. This tool will synthesize information from the corpus to generate an answer to the query. answer_query grounds answers using the same corpus as search_documents. This tool returns the generated answer_text and a list of document names (references) used to generate the answer. Always cite the authoritative source document names from `references` ( `documents/...` ) in your final response to the user. Use `get_documents` with the document names from `references` to fetch the entire document content if needed.
 
 If you get a 429 out of quota error, use search_documents instead.
 
@@ -25,7 +25,7 @@ curl --location 'https://developerknowledge.googleapis.com/mcp' \
   "params": {
     "name": "answer_query",
     "arguments": {
-      // provide these details according to the tool's MCP specification
+      // Provide these details according to the MCP tool specification.
     }
   },
   "jsonrpc": "2.0",
@@ -68,10 +68,10 @@ Response message for `AnswerQuery` .
 }
 ```
 
-| Fields         |                                                                                        |
-|----------------|----------------------------------------------------------------------------------------|
-| `answerText`   | `string` The answer to the query.                                                      |
-| `references[]` | `string` Output only. The resource names of the documents used to generate the answer. |
+| Fields         |                                                                                                                                                                                                                                                                                      |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `answerText`   | `string` The answer to the query.                                                                                                                                                                                                                                                    |
+| `references[]` | `string` Output only. The resource names of the documents used to generate the answer (e.g., `documents/docs.cloud.google.com/storage/docs/creating-buckets` ). Cite these resource names in the final response and pass them to `get_documents` if full document content is needed. |
 
 ### Tool Annotations
 

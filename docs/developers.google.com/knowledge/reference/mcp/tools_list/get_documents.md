@@ -8,7 +8,7 @@ data_source: developers.google.com
 
 ## Tool: `get_documents`
 
-Use this tool to retrieve the full content of a single document or up to 20 documents in a single call. The document names should be obtained from the `parent` field of results from a call to the `search_documents` tool. Set the `names` parameter to a list of document names.
+Use this tool to retrieve the full content of a single document or up to 20 documents in a single call. The document names should be obtained from either the `parent` field of results from a call to the `search_documents` tool or the `references` field returned by the `answer_query` tool. Set the `names` parameter to a list of document names ( `documents/...` ), and cite the authoritative source documents used in your final response.
 
 The following code sample shows how to use `curl` to call the `get_documents` MCP tool.
 
@@ -23,7 +23,7 @@ curl --location 'https://developerknowledge.googleapis.com/mcp' \
   "params": {
     "name": "get_documents",
     "arguments": {
-      // provide these details according to the tool's MCP specification
+      // Provide these details according to the MCP tool specification.
     }
   },
   "jsonrpc": "2.0",
@@ -33,7 +33,7 @@ curl --location 'https://developerknowledge.googleapis.com/mcp' \
 
 ## Input Schema
 
-Request schema for get_documents.
+Request schema for `get_documents` .
 
 ### GetDocumentsRequest
 
@@ -47,13 +47,13 @@ Request schema for get_documents.
 }
 ```
 
-| Fields    |                                                                                                                                                                                                                                                                                                                                                   |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `names[]` | `string` Required. The names of the documents to retrieve, as returned by search_documents. A maximum of 20 documents can be retrieved in one call. The documents are returned in the same order as the `names` in the request. Format: `documents/{uri_without_scheme}` Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets` |
+| Fields    |                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `names[]` | `string` Required. The names of the documents to retrieve, as returned by the `parent` field of `search_documents` results or the `references` field of `answer_query` . A maximum of 20 documents can be retrieved in one call. The documents are returned in the same order as the `names` in the request. Format: `documents/{uri_without_scheme}` Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets` |
 
 ## Output Schema
 
-Response schema for get_documents.
+Response schema for `get_documents` .
 
 ### GetDocumentsResponse
 

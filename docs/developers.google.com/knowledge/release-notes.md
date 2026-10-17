@@ -10,7 +10,7 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## October 9, 2026
 
-- add_circle `AnswerQuery` uses the [`gemini-3.5-flash`](https://developers.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
+- add_circle `AnswerQuery` uses the [`gemini-3.5-flash`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
 - check_circle `AnswerQuery` service has been restored, answers are no longer being truncated.
 
 ## October 8, 2026
@@ -91,7 +91,7 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## June 9, 2026
 
-- add_circle `AnswerQuery` now uses the [`gemini-3-flash-preview`](https://developers.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
+- add_circle `AnswerQuery` now uses the [`gemini-3-flash-preview`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
 
 ## June 1, 2026
 

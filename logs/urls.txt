@@ -9,10 +9,10 @@ https://developers.google.com/knowledge/quickstart-client-libraries	2026-10-01T1
 https://developers.google.com/knowledge/quickstart-gcloud	2026-10-14T21:44:55Z
 https://developers.google.com/knowledge/quota	2026-08-04T17:06:04Z
 https://developers.google.com/knowledge/reference/corpus-reference	2026-10-01T18:01:34Z
-https://developers.google.com/knowledge/reference/mcp	2026-08-19T19:02:22Z
-https://developers.google.com/knowledge/reference/mcp/tools_list/answer_query	2026-08-21T23:09:35Z
-https://developers.google.com/knowledge/reference/mcp/tools_list/get_documents	2026-08-21T23:09:35Z
-https://developers.google.com/knowledge/reference/mcp/tools_list/search_documents	2026-08-21T23:09:35Z
+https://developers.google.com/knowledge/reference/mcp	2026-10-16T18:24:06Z
+https://developers.google.com/knowledge/reference/mcp/tools_list/answer_query	2026-10-16T18:24:06Z
+https://developers.google.com/knowledge/reference/mcp/tools_list/get_documents	2026-10-16T18:24:06Z
+https://developers.google.com/knowledge/reference/mcp/tools_list/search_documents	2026-10-16T18:24:06Z
 https://developers.google.com/knowledge/reference/rest	2026-07-17T07:13:12Z
 https://developers.google.com/knowledge/reference/rest/v1/DocumentChunk	2026-08-21T23:09:35Z
 https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery	2026-09-24T16:21:47Z
@@ -27,9 +27,9 @@ https://developers.google.com/knowledge/reference/rest/v1alpha/documents/batchGe
 https://developers.google.com/knowledge/reference/rest/v1alpha/documents/get	2026-09-10T16:16:00Z
 https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchDocumentChunks	2026-09-24T16:21:47Z
 https://developers.google.com/knowledge/reference/rpc	2026-07-17T07:13:12Z
-https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1	2026-08-27T17:07:27Z
-https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1alpha	2026-08-19T19:02:22Z
-https://developers.google.com/knowledge/release-notes	2026-10-14T21:44:55Z
+https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1	2026-10-16T18:24:06Z
+https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1alpha	2026-10-16T18:24:06Z
+https://developers.google.com/knowledge/release-notes	2026-10-16T16:37:34Z
 https://developers.google.com/knowledge/search-retrieve	2026-10-15T16:21:07Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge	2026-09-22T17:18:31Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query	2026-09-22T17:17:42Z

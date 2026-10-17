@@ -28,6 +28,8 @@ Use this tool to find documentation about Google developer products. The documen
 
 - Gemini CLI: geminicli.com
 
+- Genkit: genkit.dev
+
 - Go: go.dev
 
 - Google AI: ai.google.dev
@@ -42,11 +44,13 @@ Use this tool to find documentation about Google developer products. The documen
 
 - Google Maps Platform: mapsplatform.google.com
 
+- Google Workspace: knowledge.workspace.google.com
+
 - TensorFlow: www.tensorflow.org
 
 - Web: web.dev
 
-This tool returns chunks of text, names, and URLs for matching documents. If the returned chunks are not detailed enough to answer the user's question, use `get_documents` with the `parent` from this tool's output to retrieve the full document content.
+This tool returns chunks of text, names, and URIs for matching documents. Prefer `search_documents` followed by `get_documents` when you need exact code samples, CLI flags, specific error messages, full tutorial walkthroughs, or deterministic keyword lookup. If the returned chunks are not detailed enough to answer the user's question, use `get_documents` with the `parent` from this tool's output to retrieve the full document content. When answering the user, always cite the authoritative source document resource names ( `documents/...` ) or URIs.
 
 The following code sample shows how to use `curl` to call the `search_documents` MCP tool.
 
@@ -61,7 +65,7 @@ curl --location 'https://developerknowledge.googleapis.com/mcp' \
   "params": {
     "name": "search_documents",
     "arguments": {
-      // provide these details according to the tool's MCP specification
+      // Provide these details according to the MCP tool specification.
     }
   },
   "jsonrpc": "2.0",
@@ -71,7 +75,7 @@ curl --location 'https://developerknowledge.googleapis.com/mcp' \
 
 ## Input Schema
 
-Request schema for search_documents. Use the query field to search for related Google developer documentation.
+Request schema for `search_documents` . Use the `query` field to search for related Google developer documentation.
 
 ### SearchDocumentChunksRequest
 
@@ -89,7 +93,7 @@ Request schema for search_documents. Use the query field to search for related G
 
 ## Output Schema
 
-Response schema for search_documents.
+Response schema for `search_documents` .
 
 ### SearchDocumentChunksResponse
 
@@ -105,9 +109,9 @@ Response schema for search_documents.
 }
 ```
 
-| Fields      |                                                                                                                                                                                                                                                                                                                                                                                          |
-|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `results[]` | `object ( `[`DocumentChunk`](https://developers.google.com/knowledge/reference/mcp/tools_list/search_documents#Output.Schema.DocumentChunk)` )` The search results for the given query. Each Document in this list contains a snippet of content relevant to the search query. Use the DocumentChunk.name field of each result with get_documents to retrieve the full document content. |
+| Fields      |                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `results[]` | `object ( `[`DocumentChunk`](https://developers.google.com/knowledge/reference/mcp/tools_list/search_documents#Output.Schema.DocumentChunk)` )` The search results for the given query. Each DocumentChunk in this list contains a snippet of content relevant to the search query. Use the `DocumentChunk.parent` field of each result with `get_documents` to retrieve the full document content. |
 
 ### DocumentChunk
 

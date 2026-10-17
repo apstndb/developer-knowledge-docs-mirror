@@ -53,6 +53,7 @@ The developerknowledge.googleapis.com MCP server has the following tools:
 <li><p>Flutter: docs.flutter.dev</p></li>
 <li><p>Fuchsia: fuchsia.dev</p></li>
 <li><p>Gemini CLI: geminicli.com</p></li>
+<li><p>Genkit: genkit.dev</p></li>
 <li><p>Go: go.dev</p></li>
 <li><p>Google AI: ai.google.dev</p></li>
 <li><p>Google Antigravity: antigravity.google</p></li>
@@ -60,19 +61,20 @@ The developerknowledge.googleapis.com MCP server has the following tools:
 <li><p>Google Developers, Ads, Search, Google Maps, Youtube: developers.google.com</p></li>
 <li><p>Google Home: developers.home.google.com</p></li>
 <li><p>Google Maps Platform: mapsplatform.google.com</p></li>
+<li><p>Google Workspace: knowledge.workspace.google.com</p></li>
 <li><p>TensorFlow: www.tensorflow.org</p></li>
 <li><p>Web: web.dev</p></li>
 </ul>
-<p>This tool returns chunks of text, names, and URLs for matching documents. If the returned chunks are not detailed enough to answer the user's question, use <code>get_documents</code> with the <code>parent</code> from this tool's output to retrieve the full document content.</p></td>
+<p>This tool returns chunks of text, names, and URIs for matching documents. Prefer <code>search_documents</code> followed by <code>get_documents</code> when you need exact code samples, CLI flags, specific error messages, full tutorial walkthroughs, or deterministic keyword lookup. If the returned chunks are not detailed enough to answer the user's question, use <code>get_documents</code> with the <code>parent</code> from this tool's output to retrieve the full document content. When answering the user, always cite the authoritative source document resource names ( <code>documents/...</code> ) or URIs.</p></td>
 </tr>
 <tr class="even">
 <td><a href="https://developers.google.com/knowledge/reference/mcp/tools_list/answer_query"><code>answer_query</code></a></td>
-<td><p>Use answer_query to get a grounded answer to a query about Google developer products. This tool has limited quota. This tool will synthesize information from the corpus to generate an answer to the query. answer_query grounds answers using the same corpus as search_documents. This tool returns the generated answer_text and a list of document names (references) used to generate the answer. Use get_documents with the document names to fetch the entire document content if needed.</p>
+<td><p>Use answer_query to get a grounded, synthesized conceptual answer to a high-level question about Google developer products. For exact code samples, CLI flags, specific error messages, or full document walkthroughs, prefer <code>search_documents</code> followed by <code>get_documents</code> instead. This tool has limited quota. This tool will synthesize information from the corpus to generate an answer to the query. answer_query grounds answers using the same corpus as search_documents. This tool returns the generated answer_text and a list of document names (references) used to generate the answer. Always cite the authoritative source document names from <code>references</code> ( <code>documents/...</code> ) in your final response to the user. Use <code>get_documents</code> with the document names from <code>references</code> to fetch the entire document content if needed.</p>
 <p>If you get a 429 out of quota error, use search_documents instead.</p></td>
 </tr>
 <tr class="odd">
 <td><a href="https://developers.google.com/knowledge/reference/mcp/tools_list/get_documents"><code>get_documents</code></a></td>
-<td>Use this tool to retrieve the full content of a single document or up to 20 documents in a single call. The document names should be obtained from the <code>parent</code> field of results from a call to the <code>search_documents</code> tool. Set the <code>names</code> parameter to a list of document names.</td>
+<td>Use this tool to retrieve the full content of a single document or up to 20 documents in a single call. The document names should be obtained from either the <code>parent</code> field of results from a call to the <code>search_documents</code> tool or the <code>references</code> field returned by the <code>answer_query</code> tool. Set the <code>names</code> parameter to a list of document names ( <code>documents/...</code> ), and cite the authoritative source documents used in your final response.</td>
 </tr>
 </tbody>
 </table>
