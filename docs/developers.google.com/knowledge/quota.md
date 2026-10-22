@@ -10,10 +10,12 @@ To view your quota and API usage information, go to the [**Quotas & System Limit
 
 The following table lists the default quotas for Developer Knowledge API methods:
 
-| API method                          | Default quota                         |
-|-------------------------------------|---------------------------------------|
-| `AnswerQuery`                       | 50 per day per project                |
-| `GetDocument` , `BatchGetDocuments` | 100 per minute per project (combined) |
-| `SearchDocumentChunks`              | 100 per minute per project            |
+| Quota              | API methods                            | Default limit                                  |
+|--------------------|----------------------------------------|------------------------------------------------|
+| Answer generation  | `AnswerQuery`                          | 50 requests per day per project                |
+| Search             | `SearchDocumentChunks` , `AnswerQuery` | 100 requests per minute per project (combined) |
+| Document retrieval | `GetDocument` , `BatchGetDocuments`    | 100 requests per minute per project (combined) |
+
+> **Note:** Because `AnswerQuery` searches the corpus before generating an answer, each `AnswerQuery` request consumes both one daily answer generation request and one per-minute search request.
 
 For additional information about quotas, visit [View and manage quotas](https://cloud.google.com/docs/quotas/view-manage) .
