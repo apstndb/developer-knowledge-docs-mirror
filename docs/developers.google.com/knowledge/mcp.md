@@ -225,14 +225,8 @@ Configure the MCP server in your project's `.agents/mcp_config.json` file (or gl
 {
   "mcpServers": {
     "google-developer-knowledge": {
-      "httpUrl": "https://developerknowledge.googleapis.com/mcp",
+      "serverUrl": "https://developerknowledge.googleapis.com/mcp",
       "authProviderType": "google_credentials",
-      "oauth": {
-        "scopes": [
-          "https://www.googleapis.com/auth/cloud-platform"
-        ]
-      },
-      "timeout": 30000,
       "headers": {
         "X-goog-user-project": "PROJECT_ID"
       }
