@@ -8,6 +8,10 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## October 28, 2026
+
+- update `AnswerQuery` now enforces a default per-minute quota limit of 10 requests per minute per project in addition to the existing 50 requests per day per project limit. For more information, see [Quotas and limits](https://developers.google.com/knowledge/quota) .
+
 ## October 9, 2026
 
 - add_circle `AnswerQuery` uses the [`gemini-3.5-flash`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.

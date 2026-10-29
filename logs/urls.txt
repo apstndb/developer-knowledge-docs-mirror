@@ -7,7 +7,7 @@ https://developers.google.com/knowledge/mcp-sdk	2026-10-14T16:24:12Z
 https://developers.google.com/knowledge/quickstart	2026-10-15T16:21:07Z
 https://developers.google.com/knowledge/quickstart-client-libraries	2026-10-01T17:39:33Z
 https://developers.google.com/knowledge/quickstart-gcloud	2026-10-14T21:44:55Z
-https://developers.google.com/knowledge/quota	2026-10-21T17:51:21Z
+https://developers.google.com/knowledge/quota	2026-10-28T17:35:59Z
 https://developers.google.com/knowledge/reference/corpus-reference	2026-10-01T18:01:34Z
 https://developers.google.com/knowledge/reference/mcp	2026-10-16T18:24:06Z
 https://developers.google.com/knowledge/reference/mcp/tools_list/answer_query	2026-10-16T18:24:06Z
@@ -29,7 +29,7 @@ https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchD
 https://developers.google.com/knowledge/reference/rpc	2026-07-17T07:13:12Z
 https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1	2026-10-16T18:24:06Z
 https://developers.google.com/knowledge/reference/rpc/google.developers.knowledge.v1alpha	2026-10-16T18:24:06Z
-https://developers.google.com/knowledge/release-notes	2026-10-16T16:37:34Z
+https://developers.google.com/knowledge/release-notes	2026-10-28T18:02:53Z
 https://developers.google.com/knowledge/search-retrieve	2026-10-15T16:21:07Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge	2026-09-22T17:18:31Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query	2026-09-22T17:17:42Z
