@@ -17,7 +17,7 @@ GitHub Actions uses Workload Identity Federation through the GCP_WORKLOAD_IDENTI
 With Go installed, configure Application Default Credentials or set DEVELOPERKNOWLEDGE_API_KEY, then run:
 
 ```bash
-./mirror.sh v0.4.0
+./mirror.sh v0.4.1
 ```
 
 The script prefers an existing local binary; remove or replace that binary if you need to change its version.
