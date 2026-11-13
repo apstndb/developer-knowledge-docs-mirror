@@ -1,4 +1,4 @@
-https://developers.google.com/knowledge/answer-query	2026-10-14T21:44:55Z
+https://developers.google.com/knowledge/answer-query	2026-11-12T16:29:24Z
 https://developers.google.com/knowledge/api	2026-10-15T16:21:07Z
 https://developers.google.com/knowledge/client-libraries	2026-10-14T21:44:55Z
 https://developers.google.com/knowledge/error-handling-and-limits	2026-10-14T21:44:55Z
@@ -36,3 +36,13 @@ https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/ans
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents	2026-09-22T17:18:01Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe	2026-09-22T17:18:31Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks	2026-09-22T17:18:01Z
+https://docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge	2026-09-22T17:17:42Z
+https://docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/answer-query	2026-09-22T17:18:01Z
+https://docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents	2026-09-22T17:17:42Z
+https://docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/describe	2026-09-22T17:18:01Z
+https://docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/search-chunks	2026-09-22T17:17:42Z
+https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge	2026-09-22T17:18:31Z
+https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/answer-query	2026-09-22T17:18:16Z
+https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents	2026-09-22T17:18:01Z
+https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/describe	2026-09-22T17:18:01Z
+https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/search-chunks	2026-09-22T17:18:01Z
