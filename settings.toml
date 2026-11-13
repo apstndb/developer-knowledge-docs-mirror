@@ -6,6 +6,8 @@ seeds = [
     "https://developers.google.com/knowledge/mcp",
     "https://developers.google.com/knowledge/reference/corpus-reference",
     "https://developers.google.com/knowledge/release-notes",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge",
     "https://docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge",
 ]
 # The bare /knowledge page is not an API document. Host-scoped prefixes also
@@ -13,7 +15,11 @@ seeds = [
 # redirect recovery when an old gcloud link is discovered or explicitly seeded.
 prefixes = [
     "developers.google.com/knowledge/",
+    "docs.cloud.google.com/sdk/gcloud/reference/developer-knowledge/",
+    "docs.cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/",
     "docs.cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
+    "cloud.google.com/sdk/gcloud/reference/developer-knowledge/",
+    "cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/",
     "cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/",
 ]
 recursive = true
