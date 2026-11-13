@@ -8,6 +8,8 @@ The mirror includes API and MCP guides, quickstarts, corpus reference, release n
 
 The [workflow](.github/workflows/update-mirror.yml) runs daily at 17:20 UTC (02:20 JST the following day), or manually with workflow_dispatch. Documentation is stored in docs/, with metadata.yaml and logs/ describing the sync.
 
+Recursive discovery follows links in newly fetched documents. Some linked pages are not indexed by the Developer Knowledge API, even when their public website returns HTTP 200. Inspect logs/failed.txt alongside metadata.yaml; a successful workflow does not mean every linked URL was retrieved.
+
 GitHub Actions uses Workload Identity Federation through the GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT repository secrets. The shared mirror identity admits apstndb-owned repositories ending in -docs-mirror on main. No API key is needed for this repository.
 
 ## Manual run
@@ -15,7 +17,7 @@ GitHub Actions uses Workload Identity Federation through the GCP_WORKLOAD_IDENTI
 With Go installed, configure Application Default Credentials or set DEVELOPERKNOWLEDGE_API_KEY, then run:
 
 ```bash
-./mirror.sh v0.3.1
+./mirror.sh v0.4.0
 ```
 
 The script prefers an existing local binary; remove or replace that binary if you need to change its version.
