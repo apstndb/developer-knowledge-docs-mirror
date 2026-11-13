@@ -2,7 +2,7 @@
 
 A Markdown mirror of [Developer Knowledge](https://developers.google.com/knowledge/api), powered by [gcp-docs-mirror-tools](https://github.com/apstndb/gcp-docs-mirror-tools).
 
-The mirror includes API and MCP guides, quickstarts, corpus reference, release notes, REST/RPC reference, and the available gcloud alpha developer-knowledge command reference. Host-scoped prefixes exclude Knowledge Graph and unrelated product trees. Narrow legacy Cloud prefixes allow redirect recovery when old links are discovered or seeded.
+The mirror includes API and MCP guides, quickstarts, corpus reference, release notes, REST/RPC reference, and the gcloud GA, beta, and alpha developer-knowledge command references. Host-scoped prefixes exclude Knowledge Graph and unrelated product trees. Narrow legacy Cloud prefixes allow redirect recovery when old links are discovered or seeded.
 
 ## Updates and authentication
 
