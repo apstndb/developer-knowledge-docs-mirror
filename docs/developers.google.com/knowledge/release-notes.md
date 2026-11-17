@@ -8,23 +8,31 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## November 10, 2026
+
+- The following domain is now included in the corpus:
+
+  - [source.android.com](https://source.android.com)
+
+  See the full list of supported domains in the [Corpus Reference](https://developers.google.com/knowledge/reference/corpus-reference) .
+
 ## October 28, 2026
 
-- update `AnswerQuery` now enforces a default per-minute quota limit of 10 requests per minute per project in addition to the existing 50 requests per day per project limit. For more information, see [Quotas and limits](https://developers.google.com/knowledge/quota) .
+- `AnswerQuery` now enforces a default per-minute quota limit of 10 requests per minute per project in addition to the existing 50 requests per day per project limit. For more information, see [Quotas and limits](https://developers.google.com/knowledge/quota) .
 
 ## October 9, 2026
 
-- add_circle `AnswerQuery` uses the [`gemini-3.5-flash`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
-- check_circle `AnswerQuery` service has been restored, answers are no longer being truncated.
+- `AnswerQuery` uses the [`gemini-3.5-flash`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
+- `AnswerQuery` service has been restored, answers are no longer being truncated.
 
 ## October 8, 2026
 
-- bug_report `AnswerQuery` is experiencing degraded service with truncated responses. We are actively working on a fix.
-- add_circle [Client libraries](https://developers.google.com/knowledge/client-libraries) for the Developer Knowledge API are available for C#, Go, Java, Node.js, PHP, Python, and Ruby languages.
+- `AnswerQuery` is experiencing degraded service with truncated responses. We are actively working on a fix.
+- [Client libraries](https://developers.google.com/knowledge/client-libraries) for the Developer Knowledge API are available for C#, Go, Java, Node.js, PHP, Python, and Ruby languages.
 
 ## October 1, 2026
 
-- add_circle The following domain is now included in the corpus:
+- The following domain is now included in the corpus:
 
   - [knowledge.workspace.google.com](https://knowledge.workspace.google.com)
 
@@ -32,29 +40,29 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## September 25, 2026
 
-- add_circle The [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill is now available in the [`google/skills`](https://github.com/google/skills) repository, which helps AI coding assistants choose the right Developer Knowledge MCP server tool and fall back to the REST API when MCP is unavailable. For more information, see [Use the Developer Knowledge agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
+- The [`retrieving-developer-knowledge`](https://github.com/google/skills/tree/main/skills/developers/retrieving-developer-knowledge) agent skill is now available in the [`google/skills`](https://github.com/google/skills) repository, which helps AI coding assistants choose the right Developer Knowledge MCP server tool and fall back to the REST API when MCP is unavailable. For more information, see [Use the Developer Knowledge agent skill](https://developers.google.com/knowledge/mcp#agent-skill) .
 
 ## September 22, 2026
 
-- add_circle [`gcloud developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge) commands are generally available (GA) in the [`gcloud` CLI](https://cloud.google.com/sdk) .
+- [`gcloud developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge) commands are generally available (GA) in the [`gcloud` CLI](https://cloud.google.com/sdk) .
   - [`gcloud developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/answer-query) : Generate answers to queries drawn from developer documentation.
   - [`gcloud developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
   - [`gcloud developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
 
 ## September 9, 2026
 
-- add_circle [`gcloud beta developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge) commands are available in the 'beta' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
+- [`gcloud beta developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge) commands are available in the 'beta' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
   - [`gcloud beta developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/answer-query) : Generate answers to queries drawn from developer documentation.
   - [`gcloud beta developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
   - [`gcloud beta developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/beta/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
 
 ## August 27, 2026
 
-- add_circle Filtering is now generally available (GA) in the v1 API for `AnswerQueryRequest` . For more information, see the reference for [`AnswerQueryRequest.filter`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery#body.request_body.FIELDS.filter) .
+- Filtering is now generally available (GA) in the v1 API for `AnswerQueryRequest` . For more information, see the reference for [`AnswerQueryRequest.filter`](https://developers.google.com/knowledge/reference/rest/v1/TopLevel/answerQuery#body.request_body.FIELDS.filter) .
 
 ## August 25, 2026
 
-- add_circle The following domain is now included in the corpus:
+- The following domain is now included in the corpus:
 
   - [genkit.dev](https://genkit.dev)
 
@@ -62,50 +70,50 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## August 21, 2026
 
-- add_circle `DocumentChunk` messages in the v1 API now include a `relevance_score` field in the range `[0.0, 1.0]` , indicating the chunk's relevance to `AnswerQuery` or `SearchDocumentChunks` queries.
+- `DocumentChunk` messages in the v1 API now include a `relevance_score` field in the range `[0.0, 1.0]` , indicating the chunk's relevance to `AnswerQuery` or `SearchDocumentChunks` queries.
 
 ## August 18, 2026
 
-- add_circle (v1alpha) [`gcloud alpha developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge) commands are available in the 'alpha' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
+- (v1alpha) [`gcloud alpha developer-knowledge`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge) commands are available in the 'alpha' component of the [`gcloud` CLI](https://cloud.google.com/sdk) .
   - [`gcloud alpha developer-knowledge answer-query`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/answer-query) : Generate answers to queries drawn from developer documentation.
   - [`gcloud alpha developer-knowledge documents describe`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/describe) : Retrieve document metadata and content views.
   - [`gcloud alpha developer-knowledge documents search-chunks`](https://cloud.google.com/sdk/gcloud/reference/alpha/developer-knowledge/documents/search-chunks) : Search relevant document chunks for a given query.
 
 ## August 7, 2026
 
-- add_circle (v1alpha) `DocumentChunk` messages now include a `relevance_score` field in the range `[0.0, 1.0]` , indicating the chunk's relevance to `AnswerQuery` or `SearchDocumentChunks` queries.
-- add_circle (v1alpha) `AnswerQueryRequest` now supports filtering search results using the `filter` field. For more information, see the reference for [`AnswerQueryRequest.filter`](https://developers.google.com/knowledge/reference/rest/v1alpha/TopLevel/answerQuery#body.QUERY_PARAMETERS.filter) .
+- (v1alpha) `DocumentChunk` messages now include a `relevance_score` field in the range `[0.0, 1.0]` , indicating the chunk's relevance to `AnswerQuery` or `SearchDocumentChunks` queries.
+- (v1alpha) `AnswerQueryRequest` now supports filtering search results using the `filter` field. For more information, see the reference for [`AnswerQueryRequest.filter`](https://developers.google.com/knowledge/reference/rest/v1alpha/TopLevel/answerQuery#body.QUERY_PARAMETERS.filter) .
 
 ## July 27, 2026
 
-- add_circle The Developer Knowledge API now supports the `https://www.googleapis.com/auth/developerprofiles.readonly` OAuth scope.
+- The Developer Knowledge API now supports the `https://www.googleapis.com/auth/developerprofiles.readonly` OAuth scope.
 
 ## July 17, 2026
 
-- add_circle The `AnswerQuery` endpoint is now Generally Available (GA). For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
+- The `AnswerQuery` endpoint is now Generally Available (GA). For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
 ## July 9, 2026
 
-- add_circle The maximum allowed `page_size` for `SearchDocumentChunks` has been increased from 20 to 100.
-- update For `SearchDocumentChunks` , `page_size` values greater than 100 are now coerced to 100 rather than returning an `INVALID_ARGUMENT` error.
+- The maximum allowed `page_size` for `SearchDocumentChunks` has been increased from 20 to 100.
+- For `SearchDocumentChunks` , `page_size` values greater than 100 are now coerced to 100 rather than returning an `INVALID_ARGUMENT` error.
 
 ## July 2, 2026
 
-- add_circle `Document` messages now include a `content_length_bytes` field, which denotes the length of the `content` field in bytes.
+- `Document` messages now include a `content_length_bytes` field, which denotes the length of the `content` field in bytes.
 
 ## June 9, 2026
 
-- add_circle `AnswerQuery` now uses the [`gemini-3-flash-preview`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
+- `AnswerQuery` now uses the [`gemini-3-flash-preview`](https://docs.cloud.google.com/generative-ai-app-builder/docs/answer-generation-models#models) model.
 
 ## June 1, 2026
 
-- add_circle [`AnswerQuery`](https://developers.google.com/knowledge/answer-query) responses now include `references` and `citations` for the provided answer.
+- [`AnswerQuery`](https://developers.google.com/knowledge/answer-query) responses now include `references` and `citations` for the provided answer.
 
   For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
 ## May 20, 2026
 
-- add_circle The following domains are now included in the corpus:
+- The following domains are now included in the corpus:
 
   - [cloud.google.com](https://cloud.google.com)
   - [dart.dev](https://dart.dev/)
@@ -116,17 +124,17 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## April 20, 2026
 
-- add_circle The Developer Knowledge API now supports the `AnswerQuery` method, which lets you generate answers to queries drawn from the [Developer Knowledge API corpus](https://developers.google.com/knowledge/reference/corpus-reference) .
+- The Developer Knowledge API now supports the `AnswerQuery` method, which lets you generate answers to queries drawn from the [Developer Knowledge API corpus](https://developers.google.com/knowledge/reference/corpus-reference) .
 
   For more information, see [Generate answers from documentation](https://developers.google.com/knowledge/answer-query) .
 
 ## April 16, 2026
 
-- new_releases The Developer Knowledge API and Developer Knowledge MCP server are now generally available (GA). Use the API and MCP server to give AI-powered development tools the ability to search and retrieve Google's official developer documentation.
+- The Developer Knowledge API and Developer Knowledge MCP server are now generally available (GA). Use the API and MCP server to give AI-powered development tools the ability to search and retrieve Google's official developer documentation.
 
 ## April 14, 2026
 
-- add_circle The following domains are now included in the corpus:
+- The following domains are now included in the corpus:
 
   - [adk.dev](https://adk.dev)
   - [antigravity.google](http://antigravity.google/)
@@ -137,31 +145,31 @@ This page provides information about updates to the Developer Knowledge API and 
 
 ## April 9, 2026
 
-- add_circle `SearchDocumentChunks` now supports filtering on the Document `data_source` , `update_time` , and `uri` fields. See [Search and retrieve documents](https://developers.google.com/knowledge/search-retrieve) and the reference for [`SearchDocumentChunks.filter`](https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchDocumentChunks#body.QUERY_PARAMETERS.filter) for more information.
+- `SearchDocumentChunks` now supports filtering on the Document `data_source` , `update_time` , and `uri` fields. See [Search and retrieve documents](https://developers.google.com/knowledge/search-retrieve) and the reference for [`SearchDocumentChunks.filter`](https://developers.google.com/knowledge/reference/rest/v1alpha/documents/searchDocumentChunks#body.QUERY_PARAMETERS.filter) for more information.
 
 ## April 2, 2026
 
-- add_circle `Document` messages now include a `data_source` field, which denotes the source of the content that is being returned.
-- add_circle The Developer Knowledge API now supports the `DocumentView` enum, allowing you to request document metadata without retrieving the full document content. A `view` field will now be populated on `Document` messages.
-- add_circle `Document` messages now have an `update_time` field, indicating when the document content or metadata last changed.
-- add_circle `DocumentChunk` messages now have a `Document` field, containing metadata about the document.
+- `Document` messages now include a `data_source` field, which denotes the source of the content that is being returned.
+- The Developer Knowledge API now supports the `DocumentView` enum, allowing you to request document metadata without retrieving the full document content. A `view` field will now be populated on `Document` messages.
+- `Document` messages now have an `update_time` field, indicating when the document content or metadata last changed.
+- `DocumentChunk` messages now have a `Document` field, containing metadata about the document.
 
 ## February 28, 2026
 
-- add_circle `Document` messages now include `title` and `description` fields, denoting the title and description of the document.
+- `Document` messages now include `title` and `description` fields, denoting the title and description of the document.
 
 ## March 15, 2026
 
-- check_circle Fixed an issue where `Document.uri` values lacked a scheme. They now include a `https://` prefix.
+- Fixed an issue where `Document.uri` values lacked a scheme. They now include a `https://` prefix.
 
 ## March 8, 2026
 
-- update The MCP Tools `get_document` and `batch_get_documents` have been removed. They are replaced by a new `get_documents` MCP Tool.
+- The MCP Tools `get_document` and `batch_get_documents` have been removed. They are replaced by a new `get_documents` MCP Tool.
 
 ## February 18, 2026
 
-- update After March 17, 2026, when you enable the Developer Knowledge API, the Developer Knowledge MCP server is automatically enabled.
+- After March 17, 2026, when you enable the Developer Knowledge API, the Developer Knowledge MCP server is automatically enabled.
 
 ## February 4, 2026
 
-- new_releases The Developer Knowledge API and Developer Knowledge MCP server are now in Public Preview. Use the API and MCP server to give AI-powered development tools the ability to search and retrieve Google's official developer documentation.
+- The Developer Knowledge API and Developer Knowledge MCP server are now in Public Preview. Use the API and MCP server to give AI-powered development tools the ability to search and retrieve Google's official developer documentation.

@@ -60,6 +60,8 @@ The Developer Knowledge API and MCP server can search and get documents from pub
 
 - [mapsplatform.google.com](https://mapsplatform.google.com)
 
+- [source.android.com](https://source.android.com)
+
 - [web.dev](https://web.dev)
 
 - [www.tensorflow.org](http://www.tensorflow.org)

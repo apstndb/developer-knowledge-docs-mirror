@@ -190,15 +190,15 @@ To configure the MCP server in Antigravity IDE or the Antigravity extension (suc
 
 To install the MCP server using one-click setup:
 
-1.  In the Agent panel, click the **Additional options** ( more_horiz ) menu and select **MCP Servers** .
+1.  In the Agent panel, click the **Additional options** ( ) menu and select **MCP Servers** .
 2.  Search for **Google Developer Knowledge** .
-3.  Click the **Install** ( file_download ) icon. Antigravity automatically configures the server and connects using your active Google credentials.
+3.  Click the **Install** ( ) icon. Antigravity automatically configures the server and connects using your active Google credentials.
 
 ### API key
 
 To configure an API key in Antigravity IDE or the Antigravity extension:
 
-1.  In the Agent panel, click the **Additional options** ( more_horiz ) menu \> **MCP Servers** \> **Manage MCP Servers** \> **View raw config** (or open `.agents/mcp_config.json` ).
+1.  In the Agent panel, click the **Additional options** ( ) menu \> **MCP Servers** \> **Manage MCP Servers** \> **View raw config** (or open `.agents/mcp_config.json` ).
 
 2.  Add the following server configuration:
 
