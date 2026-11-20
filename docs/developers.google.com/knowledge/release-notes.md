@@ -8,6 +8,14 @@ data_source: developers.google.com
 
 This page provides information about updates to the Developer Knowledge API and Developer Knowledge MCP server. Check this page for announcements about new or updated features, bug fixes, and known issues.
 
+## November 18, 2026
+
+- The following domain is now included in the corpus:
+
+  - [pay.google.com](https://pay.google.com)
+
+  See the full list of supported domains in the [Corpus Reference](https://developers.google.com/knowledge/reference/corpus-reference) .
+
 ## November 10, 2026
 
 - The following domain is now included in the corpus:
