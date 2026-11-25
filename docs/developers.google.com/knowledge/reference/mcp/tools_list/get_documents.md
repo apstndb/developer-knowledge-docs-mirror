@@ -8,7 +8,7 @@ data_source: developers.google.com
 
 ## Tool: `get_documents`
 
-Use this tool to retrieve the full content of a single document or up to 20 documents in a single call. The document names should be obtained from either the `parent` field of results from a call to the `search_documents` tool or the `references` field returned by the `answer_query` tool. Set the `names` parameter to a list of document names ( `documents/...` ), and cite the authoritative source documents used in your final response.
+Use this tool to retrieve the full Markdown content of a single document or up to 20 documents in a single call by passing a list of document resource names in the `names` parameter (e.g., `get_documents(names=["documents/..."])` ; the parameter is `names` taking a list of strings, not `name` ). Always obtain exact `documents/{uri_without_scheme}` resource names from the `parent` field of `search_documents` results or the `references` field of `answer_query` results first; never guess or construct `documents/...` paths from memory or external URLs. Cite the authoritative source document resource names ( `documents/...` ) used in your final response.
 
 The following code sample shows how to use `curl` to call the `get_documents` MCP tool.
 
@@ -47,9 +47,9 @@ Request schema for `get_documents` .
 }
 ```
 
-| Fields    |                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `names[]` | `string` Required. The names of the documents to retrieve, as returned by the `parent` field of `search_documents` results or the `references` field of `answer_query` . A maximum of 20 documents can be retrieved in one call. The documents are returned in the same order as the `names` in the request. Format: `documents/{uri_without_scheme}` Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets` |
+| Fields    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `names[]` | `string` Required. List of 1 to 20 document resource names ( `names` ) to retrieve in a single call (for either a single document or multiple documents), exactly as returned by the `parent` field of `search_documents` results or the `references` field of `answer_query` . Do not pass a single string or use a `name` parameter, and never guess or construct `documents/...` paths without calling `search_documents` or `answer_query` first. The documents are returned in the same order as the `names` in the request. Format: `documents/{uri_without_scheme}` Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets` |
 
 ## Output Schema
 
@@ -90,7 +90,7 @@ Response schema for `get_documents` .
 | Fields        |                                                                                                                                                                           |
 |---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `name`        | `string` Identifier. The resource name of the document. Format: `documents/{uri_without_scheme}` Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets` |
-| `uri`         | `string` Output only. The URI of the content, such as `https://cloud.google.com/storage/docs/creating-buckets` .                                                          |
+| `uri`         | `string` Output only. The URI of the content, such as `https://docs.cloud.google.com/storage/docs/creating-buckets` .                                                     |
 | `content`     | `string` Output only. The content of the document in Markdown format.                                                                                                     |
 | `description` | `string` Output only. A description of the document.                                                                                                                      |
 | `title`       | `string` Output only. The title of the document.                                                                                                                          |
